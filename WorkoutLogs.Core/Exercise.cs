@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace WorkoutLogs.Core
 {
-    public class ExerciseGroup : BaseEntity
+    public class Exercise : BaseEntity
     {
         [Required]
         public string Name { get; set; }
-        
+        public string? TutorialUrl { get; set; }
         [Required]
-        public int ExerciseTypeId { get; set; }
+        public int ExerciseGroupId { get; set; }
         
-        [ForeignKey("ExerciseTypeId")]
-        public ExerciseType ExerciseType { get; set; }
+        [ForeignKey("ExerciseGroupId")]
+        public ExerciseGroup ExerciseGroup { get; set; }
     }
 }

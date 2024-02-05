@@ -13,11 +13,5 @@ namespace WorkoutLogs.Core
     {
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        public int PhaseId { get; set; }
-
-        [ForeignKey("PhaseId")]
-        public Phase Phase { get; set; }
     }
 }

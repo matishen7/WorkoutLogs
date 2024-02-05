@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D6A2124F-D23
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutLogs.Core", "WorkoutLogs.Core\WorkoutLogs.Core.csproj", "{69B69296-7285-4AA3-B270-8A06555759D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutLogs.Persistence", "WorkoutLogs.Persistence\WorkoutLogs.Persistence.csproj", "{5E554961-D526-4785-AC4C-1D101E0D1099}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{69B69296-7285-4AA3-B270-8A06555759D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69B69296-7285-4AA3-B270-8A06555759D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69B69296-7285-4AA3-B270-8A06555759D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E554961-D526-4785-AC4C-1D101E0D1099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E554961-D526-4785-AC4C-1D101E0D1099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E554961-D526-4785-AC4C-1D101E0D1099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E554961-D526-4785-AC4C-1D101E0D1099}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{69B69296-7285-4AA3-B270-8A06555759D2} = {D6A2124F-D23F-4C3A-A8BB-CF2E3EAA1EB1}
+		{5E554961-D526-4785-AC4C-1D101E0D1099} = {D6A2124F-D23F-4C3A-A8BB-CF2E3EAA1EB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {592CBB83-4095-40BD-8BE5-F1A3D14A52BB}

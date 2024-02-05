@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace WorkoutLogs.Core
 {
-    public class UserExerciseLog : BaseEntity
+    public class ExerciseLog : BaseEntity
     {
         [Required]
-        public int UserId { get; set; }
+        public int MemberId { get; set; }
 
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+        [ForeignKey("MemberId")]
+        public Member Member { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
