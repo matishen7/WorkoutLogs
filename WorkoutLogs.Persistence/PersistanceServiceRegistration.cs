@@ -17,6 +17,7 @@ namespace WorkoutLogs.Persistence
             });
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();
+            services.AddScoped<IExerciseGroupRepository, ExerciseGroupRepository>();
             return services;
         }
     }

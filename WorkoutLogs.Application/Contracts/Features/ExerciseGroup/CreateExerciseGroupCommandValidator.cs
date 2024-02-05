@@ -22,8 +22,7 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroup
 
         private async Task<bool> ExerciseTypeExists(int exerciseTypeId, CancellationToken cancellationToken)
         {
-            var exerciseType = await _exerciseTypeRepository.GetByIdAsync(exerciseTypeId);
-            return exerciseType != null;
+            return await _exerciseTypeRepository.ExerciseTypeExists(exerciseTypeId, cancellationToken);
         }
     }
 
