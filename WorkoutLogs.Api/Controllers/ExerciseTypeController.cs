@@ -21,9 +21,9 @@ namespace WorkoutLogs.Api.Controllers
         {
             try
             {
-                var projectId = await _mediator.Send(createExerciseTypeCommand);
+                var exerciseTypeId = await _mediator.Send(createExerciseTypeCommand);
 
-                return Ok($"Project created successfully with ID: {projectId}");
+                return Ok($"Exercise type is created successfully with ID: {exerciseTypeId}");
             }
             catch (ValidationException ex)
             {
