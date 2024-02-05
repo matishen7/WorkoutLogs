@@ -16,7 +16,6 @@ namespace WorkoutLogs.Persistence.DbContexts
 
         }
 
-        public DbSet<Phase> Phases { get; set; }
         public DbSet<ExerciseType> ExerciseTypes { get; set; }
         public DbSet<ExerciseGroup> ExerciseGroups { get; set; }
         public DbSet<Difficulty> Difficulties { get; set; }
@@ -26,6 +25,13 @@ namespace WorkoutLogs.Persistence.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            foreach (var property in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(t => t.GetProperties())
+                .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+            {
+                property.SetColumnType("decimal(18,2)");
+            }
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(WorkoutLogsDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
