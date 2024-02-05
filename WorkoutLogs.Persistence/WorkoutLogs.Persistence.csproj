@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WorkoutLogs.Application\WorkoutLogs.Application.csproj" />
     <ProjectReference Include="..\WorkoutLogs.Core\WorkoutLogs.Core.csproj" />
   </ItemGroup>
 
