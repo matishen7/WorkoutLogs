@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
+using WorkoutLogs.Core;
 
-namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroup.Commands
+namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Commands
 {
     public class CreateExerciseGroupCommandHandler : IRequestHandler<CreateExerciseGroupCommand, int>
     {
@@ -32,7 +33,7 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroup.Commands
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var exerciseGroup = new Core.ExerciseGroup
+            var exerciseGroup = new ExerciseGroup
             {
                 Name = request.Name,
                 ExerciseTypeId = request.ExerciseTypeId

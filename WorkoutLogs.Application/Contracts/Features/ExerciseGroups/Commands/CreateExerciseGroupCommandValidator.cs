@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutLogs.Application.Persistence;
 
-namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroup.Commands
+namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Commands
 {
     public class CreateExerciseGroupCommandValidator : AbstractValidator<CreateExerciseGroupCommand>
     {

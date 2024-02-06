@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using WorkoutLogs.Application.Contracts.Features.Exercise.Commands;
+using WorkoutLogs.Application.Contracts.Features.Exercises.Commands;
 using WorkoutLogs.Core;
 
 namespace WorkoutLogs.Application.MappingProfiles

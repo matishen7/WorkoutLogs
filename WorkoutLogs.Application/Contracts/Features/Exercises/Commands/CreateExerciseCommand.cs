@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutLogs.Application.Contracts.Features.Exercise.Commands
+namespace WorkoutLogs.Application.Contracts.Features.Exercises.Commands
 {
     public class CreateExerciseCommand : IRequest<int>
     {

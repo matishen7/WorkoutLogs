@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutLogs.Application.Contracts.Features.ExerciseType.Commands;
+using WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands;
 using WorkoutLogs.Core;
 
 namespace WorkoutLogs.Application.MappingProfiles

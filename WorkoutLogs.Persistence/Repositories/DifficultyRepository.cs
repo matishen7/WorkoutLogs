@@ -15,5 +15,12 @@ namespace WorkoutLogs.Persistence.Repositories
         public DifficultyRepository(WorkoutLogsDbContext context) : base(context)
         {
         }
+
+        public async Task<bool> DifficultyExists(int id, CancellationToken cancellationToken)
+        {
+            var difficulty = _context.Difficulties
+           .FirstOrDefault(x => x.Id == id);
+            return difficulty != null;
+        }
     }
 }

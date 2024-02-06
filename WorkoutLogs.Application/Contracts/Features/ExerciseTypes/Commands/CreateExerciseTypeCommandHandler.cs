@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
 
-namespace WorkoutLogs.Application.Contracts.Features.ExerciseType.Commands
+namespace WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands
 {
     public class CreateExerciseTypeCommandHandler : IRequestHandler<CreateExerciseTypeCommand, int>
     {

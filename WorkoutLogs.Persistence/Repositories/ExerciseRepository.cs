@@ -14,5 +14,12 @@ namespace WorkoutLogs.Persistence.Repositories
         public ExerciseRepository(WorkoutLogsDbContext context) : base(context)
         {
         }
+
+        public async Task<bool> ExerciseExists(int id, CancellationToken cancellationToken)
+        {
+            var exercise = _context.Exercises
+           .FirstOrDefault(x => x.Id == id);
+            return exercise != null;
+        }
     }
 }

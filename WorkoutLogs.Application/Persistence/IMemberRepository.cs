@@ -7,8 +7,9 @@ using WorkoutLogs.Core;
 
 namespace WorkoutLogs.Application.Persistence
 {
-    public interface IDifficultyRepository : IGenericRepository<Difficulty>
+    public interface IMemberRepository : IGenericRepository<Member>
     {
-        public Task<bool> DifficultyExists(int id, CancellationToken cancellationToken);
+        public Task<bool> MemberExists(int memberId, CancellationToken cancellationToken);
+
     }
 }

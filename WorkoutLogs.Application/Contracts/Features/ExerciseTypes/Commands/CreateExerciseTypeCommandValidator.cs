@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace WorkoutLogs.Application.Contracts.Features.ExerciseType.Commands
+namespace WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands
 {
     public class CreateExerciseTypeCommandValidator : AbstractValidator<CreateExerciseTypeCommand>
     {

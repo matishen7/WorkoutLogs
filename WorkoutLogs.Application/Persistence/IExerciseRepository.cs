@@ -9,5 +9,6 @@ namespace WorkoutLogs.Application.Persistence
 {
     public interface IExerciseRepository : IGenericRepository<Exercise>
     {
+        public Task<bool> ExerciseExists(int id, CancellationToken cancellationToken);
     }
 }

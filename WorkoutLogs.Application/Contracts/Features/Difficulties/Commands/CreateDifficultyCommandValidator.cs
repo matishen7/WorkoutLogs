@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutLogs.Application.Contracts.Features.Difficulty.Commands
+namespace WorkoutLogs.Application.Contracts.Features.Difficulties.Commands
 {
     public class CreateDifficultyCommandValidator : AbstractValidator<CreateDifficultyCommand>
     {

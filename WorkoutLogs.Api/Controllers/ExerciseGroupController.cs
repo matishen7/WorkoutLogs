@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WorkoutLogs.Application.Contracts.Features.ExerciseGroup.Commands;
-using WorkoutLogs.Application.Contracts.Features.ExerciseType.Commands;
+using WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Commands;
+using WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands;
 using WorkoutLogs.Application.Middleware;
 
 namespace WorkoutLogs.Api.Controllers

@@ -1,7 +1,7 @@
 using AutoMapper;
 using FluentAssertions;
 using Moq;
-using WorkoutLogs.Application.Contracts.Features.ExerciseType.Commands;
+using WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands;
 using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
 using WorkoutLogs.Core;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutLogs.Application.Contracts.Features.Exercise.Commands;
+using WorkoutLogs.Application.Contracts.Features.Exercises.Commands;
 using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
 using FluentAssertions;

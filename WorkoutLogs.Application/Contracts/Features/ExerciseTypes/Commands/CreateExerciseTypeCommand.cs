@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroup.Commands
+namespace WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands
 {
-    public class CreateExerciseGroupCommand : IRequest<int>
+    public class CreateExerciseTypeCommand : IRequest<int>
     {
         public string Name { get; set; }
-        public int ExerciseTypeId { get; set; }
     }
-
 }

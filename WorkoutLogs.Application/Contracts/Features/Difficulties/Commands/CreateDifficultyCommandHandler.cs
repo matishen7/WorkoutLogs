@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
+using WorkoutLogs.Core;
 
-namespace WorkoutLogs.Application.Contracts.Features.Difficulty.Commands
+namespace WorkoutLogs.Application.Contracts.Features.Difficulties.Commands
 {
     public class CreateDifficultyCommandHandler : IRequestHandler<CreateDifficultyCommand, int>
     {
@@ -28,7 +29,7 @@ namespace WorkoutLogs.Application.Contracts.Features.Difficulty.Commands
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var difficulty = new Core.Difficulty
+            var difficulty = new Difficulty
             {
                 Level = request.Level
             };
