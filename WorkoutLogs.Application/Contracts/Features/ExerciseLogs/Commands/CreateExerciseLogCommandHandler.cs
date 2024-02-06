@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MediatR;
+using System.Threading;
 using System.Threading.Tasks;
+using WorkoutLogs.Application.Middleware;
+using WorkoutLogs.Application.Persistence;
+using WorkoutLogs.Core;
 
 namespace WorkoutLogs.Application.Contracts.Features.ExerciseLogs.Commands
 {
-    using MediatR;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using FluentValidation;
-    using WorkoutLogs.Application.Persistence;
-    using WorkoutLogs.Core;
-
     public class CreateExerciseLogCommandHandler : IRequestHandler<CreateExerciseLogCommand, int>
     {
         private readonly IExerciseLogRepository _exerciseLogRepository;
