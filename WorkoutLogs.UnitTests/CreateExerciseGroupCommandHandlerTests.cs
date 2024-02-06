@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutLogs.Application.Contracts.Features.ExerciseGroup;
+using WorkoutLogs.Application.Contracts.Features.ExerciseGroup.Commands;
 using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
 using WorkoutLogs.Core;
