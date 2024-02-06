@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WorkoutLogs.Application.Contracts.Features.ExerciseGroup;
+using WorkoutLogs.Application.Contracts.Features.ExerciseGroup.Commands;
 using WorkoutLogs.Application.Contracts.Features.ExerciseType.Commands;
 using WorkoutLogs.Application.Middleware;
 
