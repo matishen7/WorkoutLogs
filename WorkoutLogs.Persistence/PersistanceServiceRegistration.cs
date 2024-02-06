@@ -19,7 +19,11 @@ namespace WorkoutLogs.Persistence
             services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();
             services.AddScoped<IExerciseGroupRepository, ExerciseGroupRepository>();
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
+            services.AddScoped<IDifficultyRepository, DifficultyRepository>();
+            services.AddScoped<IDbSeeder, DifficultyDbSeeder>();
+
             return services;
         }
+
     }
 }

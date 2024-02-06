@@ -11,6 +11,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+var serviceProvider = app.Services;
+
+using (var scope = serviceProvider.CreateScope())
+{
+    var dbSeeder = scope.ServiceProvider.GetRequiredService<IDbSeeder>();
+    dbSeeder.SeedData();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
