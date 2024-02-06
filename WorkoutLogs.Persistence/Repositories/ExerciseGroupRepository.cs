@@ -10,6 +10,11 @@ namespace WorkoutLogs.Persistence.Repositories
         {
         }
 
-       
+        public async Task<bool> ExistsAsync(int exerciseGroupId)
+        {
+            var exerciseGroup = _context.ExerciseGroups
+            .FirstOrDefault(x => x.Id == exerciseGroupId);
+            return exerciseGroup != null;
+        }
     }
 }

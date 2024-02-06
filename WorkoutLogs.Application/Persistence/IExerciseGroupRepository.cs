@@ -9,5 +9,6 @@ namespace WorkoutLogs.Application.Persistence
 {
     public interface IExerciseGroupRepository : IGenericRepository<ExerciseGroup>
     {
+        Task<bool> ExistsAsync(int exerciseGroupId);
     }
 }
