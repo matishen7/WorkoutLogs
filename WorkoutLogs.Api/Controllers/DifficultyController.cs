@@ -81,5 +81,24 @@ namespace WorkoutLogs.Api.Controllers
             var difficulties = await _mediator.Send(new GetAllDifficultiesQuery());
             return Ok(difficulties);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDifficulty(int id)
+        {
+            try
+            {
+                await _mediator.Send(new DeleteDifficultyCommand { Id = id });
+                return NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
+            }
+        }
+
     }
 }
