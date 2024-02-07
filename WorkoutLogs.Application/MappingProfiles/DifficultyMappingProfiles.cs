@@ -15,6 +15,7 @@ namespace WorkoutLogs.Application.MappingProfiles
         public DifficultyMappingProfiles()
         {
             CreateMap<Difficulty, CreateDifficultyCommand>().ReverseMap();
+            CreateMap<Difficulty, UpdateDifficultyCommand>().ReverseMap();
         }
     }
 }
