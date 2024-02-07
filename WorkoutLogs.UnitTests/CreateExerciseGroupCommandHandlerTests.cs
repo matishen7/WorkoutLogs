@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using AutoMapper;
+using FluentAssertions;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,14 @@ namespace WorkoutLogs.UnitTests
     {
         private Mock<IExerciseGroupRepository> _exerciseGroupRepositoryMock;
         private Mock<IExerciseTypeRepository> _exerciseTypeRepositoryMock;
+        private Mock<IMapper> _mapperMock;
 
         [SetUp]
         public void Setup()
         {
             _exerciseGroupRepositoryMock = new Mock<IExerciseGroupRepository>();
             _exerciseTypeRepositoryMock = new Mock<IExerciseTypeRepository>();
+            _mapperMock = new Mock<IMapper>();
         }
 
         [Test]
@@ -30,7 +33,7 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var command = new CreateExerciseGroupCommand { Name = "Test Exercise Group", ExerciseTypeId = 1 };
-            var handler = new CreateExerciseGroupCommandHandler(_exerciseGroupRepositoryMock.Object, _exerciseTypeRepositoryMock.Object);
+            var handler = new CreateExerciseGroupCommandHandler(_exerciseGroupRepositoryMock.Object, _exerciseTypeRepositoryMock.Object, _mapperMock.Object);
             _exerciseTypeRepositoryMock.Setup(repo => repo.ExerciseTypeExists(It.IsAny<int>(), CancellationToken.None)).ReturnsAsync(true);
 
             // Act
@@ -45,7 +48,7 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var invalidCommand = new CreateExerciseGroupCommand { Name = "", ExerciseTypeId = 0 }; // Invalid command
-            var handler = new CreateExerciseGroupCommandHandler(_exerciseGroupRepositoryMock.Object, _exerciseTypeRepositoryMock.Object);
+            var handler = new CreateExerciseGroupCommandHandler(_exerciseGroupRepositoryMock.Object, _exerciseTypeRepositoryMock.Object,_mapperMock.Object);
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<ValidationException>(() => handler.Handle(invalidCommand, CancellationToken.None));
@@ -60,7 +63,7 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var invalidCommand = new CreateExerciseGroupCommand { Name = "Test", ExerciseTypeId = 999 }; // Invalid ExerciseTypeId
-            var handler = new CreateExerciseGroupCommandHandler(_exerciseGroupRepositoryMock.Object, _exerciseTypeRepositoryMock.Object);
+            var handler = new CreateExerciseGroupCommandHandler(_exerciseGroupRepositoryMock.Object, _exerciseTypeRepositoryMock.Object, _mapperMock.Object);
 
             _exerciseTypeRepositoryMock.Setup(repo => repo.ExerciseTypeExists(It.IsAny<int>(), CancellationToken.None)).ReturnsAsync(false);
 

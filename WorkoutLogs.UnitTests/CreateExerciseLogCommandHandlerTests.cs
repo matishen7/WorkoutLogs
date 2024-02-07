@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using AutoMapper;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace WorkoutLogs.UnitTests
         private Mock<IExerciseRepository> _exerciseRepositoryMock;
         private Mock<IMemberRepository> _memberRepositoryMock;
         private Mock<IDifficultyRepository> _difficultyRepositoryMock;
-
+        private Mock<IMapper> _mapper;
         [SetUp]
         public void SetUp()
         {
@@ -25,12 +26,14 @@ namespace WorkoutLogs.UnitTests
             _exerciseRepositoryMock = new Mock<IExerciseRepository>();
             _memberRepositoryMock = new Mock<IMemberRepository>();
             _difficultyRepositoryMock = new Mock<IDifficultyRepository>();
+            _mapper = new Mock<IMapper>();
 
             _handler = new CreateExerciseLogCommandHandler(
                 _exerciseLogRepositoryMock.Object,
                 _exerciseRepositoryMock.Object,
                 _memberRepositoryMock.Object,
-                _difficultyRepositoryMock.Object);
+                _difficultyRepositoryMock.Object,
+                _mapper.Object);
         }
 
         [Test]
@@ -65,7 +68,7 @@ namespace WorkoutLogs.UnitTests
         }
 
         [Test]
-        public async Task Handle_MemberDoesNotExist_ThrowsValidationException()
+        public async Task Handle_ValidationErrors_ThrowsValidationException()
         {
             // Arrange
             var command = new CreateExerciseLogCommand

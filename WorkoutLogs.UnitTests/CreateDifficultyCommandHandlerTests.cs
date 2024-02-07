@@ -9,6 +9,7 @@ using WorkoutLogs.Application.Contracts.Features.Difficulties;
 using WorkoutLogs.Application.Persistence;
 using WorkoutLogs.Application.Middleware;
 using FluentAssertions;
+using AutoMapper;
 
 namespace WorkoutLogs.UnitTests
 {
@@ -16,11 +17,13 @@ namespace WorkoutLogs.UnitTests
     public class CreateDifficultyCommandHandlerTests
     {
         private Mock<IDifficultyRepository> _difficultyRepositoryMock;
+        private Mock<IMapper> _mapper;
 
         [SetUp]
         public void Setup()
         {
             _difficultyRepositoryMock = new Mock<IDifficultyRepository>();
+            _mapper = new Mock<IMapper>();
         }
 
         [Test]
@@ -28,7 +31,7 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var command = new CreateDifficultyCommand { Level = "Easy" };
-            var handler = new CreateDifficultyCommandHandler(_difficultyRepositoryMock.Object);
+            var handler = new CreateDifficultyCommandHandler(_difficultyRepositoryMock.Object, _mapper.Object);
 
             // Act
             var result = await handler.Handle(command, CancellationToken.None);
@@ -42,7 +45,7 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var invalidCommand = new CreateDifficultyCommand { Level = "" }; // Invalid command
-            var handler = new CreateDifficultyCommandHandler(_difficultyRepositoryMock.Object);
+            var handler = new CreateDifficultyCommandHandler(_difficultyRepositoryMock.Object, _mapper.Object);
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<ValidationException>(() => handler.Handle(invalidCommand, CancellationToken.None));

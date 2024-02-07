@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
+using WorkoutLogs.Core;
 
 namespace WorkoutLogs.Application.Contracts.Features.Exercises.Commands
 {
@@ -13,11 +15,13 @@ namespace WorkoutLogs.Application.Contracts.Features.Exercises.Commands
     {
         private readonly IExerciseRepository _exerciseRepository;
         private readonly IExerciseGroupRepository _exerciseGroupRepository;
+        private readonly IMapper _mapper;
 
-        public CreateExerciseCommandHandler(IExerciseRepository exerciseRepository, IExerciseGroupRepository exerciseGroupRepository)
+        public CreateExerciseCommandHandler(IExerciseRepository exerciseRepository, IExerciseGroupRepository exerciseGroupRepository, IMapper mapper)
         {
             _exerciseRepository = exerciseRepository;
             _exerciseGroupRepository = exerciseGroupRepository;
+            _mapper = mapper;
         }
 
         public async Task<int> Handle(CreateExerciseCommand request, CancellationToken cancellationToken)
@@ -30,12 +34,7 @@ namespace WorkoutLogs.Application.Contracts.Features.Exercises.Commands
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var exercise = new Core.Exercise
-            {
-                Name = request.Name,
-                TutorialUrl = request.TutorialUrl,
-                ExerciseGroupId = request.ExerciseGroupId
-            };
+            var exercise = _mapper.Map<Exercise>(request);
 
             await _exerciseRepository.CreateAsync(exercise);
 

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkoutLogs.Application.Middleware;
@@ -13,17 +14,20 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseLogs.Commands
         private readonly IMemberRepository _memberRepository;
         private readonly IDifficultyRepository _difficultyRepository;
         private readonly IExerciseRepository _exerciseRepository;
+        private readonly IMapper _mapper;
 
         public CreateExerciseLogCommandHandler(
             IExerciseLogRepository exerciseLogRepository,
             IExerciseRepository exerciseRepository,
             IMemberRepository memberRepository,
-            IDifficultyRepository difficultyRepository )
+            IDifficultyRepository difficultyRepository,
+            IMapper mapper)
         {
             _exerciseLogRepository = exerciseLogRepository;
             _memberRepository = memberRepository;
             _difficultyRepository = difficultyRepository;
             _exerciseRepository = exerciseRepository;
+            _mapper = mapper;
 
         }
 
@@ -36,17 +40,7 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseLogs.Commands
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var exerciseLog = new ExerciseLog
-            {
-                MemberId = request.MemberId,
-                Date = request.Date,
-                ExerciseId = request.ExerciseId,
-                Sets = request.Sets,
-                Reps = request.Reps,
-                Weight = request.Weight,
-                DifficultyId = request.DifficultyId,
-                AdditionalNotes = request.AdditionalNotes
-            };
+            var exerciseLog = _mapper.Map<ExerciseLog>(request);
 
             await _exerciseLogRepository.CreateAsync(exerciseLog);
             return exerciseLog.Id;

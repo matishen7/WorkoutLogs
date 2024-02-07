@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,16 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Commands
     {
         private readonly IExerciseGroupRepository _exerciseGroupRepository;
         private readonly IExerciseTypeRepository _exerciseTypeRepository;
+        private readonly IMapper _mapper;
 
         public CreateExerciseGroupCommandHandler(
             IExerciseGroupRepository exerciseGroupRepository,
-            IExerciseTypeRepository exerciseTypeRepository)
+            IExerciseTypeRepository exerciseTypeRepository,
+            IMapper mapper)
         {
             _exerciseGroupRepository = exerciseGroupRepository;
             _exerciseTypeRepository = exerciseTypeRepository;
+            _mapper = mapper;
         }
 
         public async Task<int> Handle(CreateExerciseGroupCommand request, CancellationToken cancellationToken)
@@ -33,11 +37,7 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Commands
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var exerciseGroup = new ExerciseGroup
-            {
-                Name = request.Name,
-                ExerciseTypeId = request.ExerciseTypeId
-            };
+            var exerciseGroup = _mapper.Map<ExerciseGroup>(request);
 
             await _exerciseGroupRepository.CreateAsync(exerciseGroup);
 

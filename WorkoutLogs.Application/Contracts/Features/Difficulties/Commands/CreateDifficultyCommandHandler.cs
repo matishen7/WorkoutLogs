@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,12 @@ namespace WorkoutLogs.Application.Contracts.Features.Difficulties.Commands
     public class CreateDifficultyCommandHandler : IRequestHandler<CreateDifficultyCommand, int>
     {
         private readonly IDifficultyRepository _difficultyRepository;
+        private readonly IMapper _mapper;
 
-        public CreateDifficultyCommandHandler(IDifficultyRepository difficultyRepository)
+        public CreateDifficultyCommandHandler(IDifficultyRepository difficultyRepository,
+            IMapper mapper)
         {
+            _mapper = mapper;
             _difficultyRepository = difficultyRepository;
         }
 
@@ -29,10 +33,7 @@ namespace WorkoutLogs.Application.Contracts.Features.Difficulties.Commands
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var difficulty = new Difficulty
-            {
-                Level = request.Level
-            };
+            var difficulty = _mapper.Map<Difficulty>(request);
 
             await _difficultyRepository.CreateAsync(difficulty);
 

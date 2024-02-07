@@ -8,6 +8,7 @@ using WorkoutLogs.Application.Contracts.Features.Exercises.Commands;
 using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
 using FluentAssertions;
+using AutoMapper;
 
 namespace WorkoutLogs.UnitTests
 {
@@ -16,12 +17,14 @@ namespace WorkoutLogs.UnitTests
     {
         private Mock<IExerciseRepository> _exerciseRepositoryMock;
         private Mock<IExerciseGroupRepository> _exerciseGroupRepositoryMock;
+        private Mock<IMapper> _mapper;
 
         [SetUp]
         public void Setup()
         {
             _exerciseRepositoryMock = new Mock<IExerciseRepository>();
             _exerciseGroupRepositoryMock = new Mock<IExerciseGroupRepository>();
+            _mapper = new Mock<IMapper>();
         }
 
         [Test]
@@ -30,7 +33,7 @@ namespace WorkoutLogs.UnitTests
             // Arrange
             var command = new CreateExerciseCommand { Name = "Test Exercise", TutorialUrl = "http://example.com", ExerciseGroupId = 1 };
             _exerciseGroupRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<int>())).ReturnsAsync(true);
-            var handler = new CreateExerciseCommandHandler(_exerciseRepositoryMock.Object, _exerciseGroupRepositoryMock.Object);
+            var handler = new CreateExerciseCommandHandler(_exerciseRepositoryMock.Object, _exerciseGroupRepositoryMock.Object, _mapper.Object);
 
             // Act
             var result = await handler.Handle(command, CancellationToken.None);
@@ -44,7 +47,7 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var invalidCommand = new CreateExerciseCommand { Name = "", TutorialUrl = "http://example.com", ExerciseGroupId = 0 }; // Invalid command
-            var handler = new CreateExerciseCommandHandler(_exerciseRepositoryMock.Object, _exerciseGroupRepositoryMock.Object);
+            var handler = new CreateExerciseCommandHandler(_exerciseRepositoryMock.Object, _exerciseGroupRepositoryMock.Object, _mapper.Object);
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<ValidationException>(() => handler.Handle(invalidCommand, CancellationToken.None));
@@ -60,7 +63,7 @@ namespace WorkoutLogs.UnitTests
             // Arrange
             var invalidCommand = new CreateExerciseCommand { Name = "Test Exercise", TutorialUrl = "http://example.com", ExerciseGroupId = 999 }; // Invalid ExerciseGroupId
             _exerciseGroupRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<int>())).ReturnsAsync(false);
-            var handler = new CreateExerciseCommandHandler(_exerciseRepositoryMock.Object, _exerciseGroupRepositoryMock.Object);
+            var handler = new CreateExerciseCommandHandler(_exerciseRepositoryMock.Object, _exerciseGroupRepositoryMock.Object, _mapper.Object);
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<ValidationException>(() => handler.Handle(invalidCommand, CancellationToken.None));
