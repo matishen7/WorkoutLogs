@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutLogs.Application.Contracts.Features.Difficulties.Commands;
+using WorkoutLogs.Application.Contracts.Features.Difficulties.Queries;
 using WorkoutLogs.Application.Contracts.Features.Exercises.Commands;
 using WorkoutLogs.Application.Middleware;
 
@@ -48,6 +49,25 @@ namespace WorkoutLogs.Api.Controllers
             catch (ValidationException ex)
             {
                 return BadRequest(new { Errors = ex.Errors });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDifficultyById(int id)
+        {
+            try
+            {
+                var query = new GetDifficultyByIdQuery { Id = id };
+                var difficultyDto = await _mediator.Send(query);
+                return Ok(difficultyDto);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
