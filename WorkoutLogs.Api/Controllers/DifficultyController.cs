@@ -74,5 +74,12 @@ namespace WorkoutLogs.Api.Controllers
                 return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<DifficultyDto>>> GetAllDifficulties()
+        {
+            var difficulties = await _mediator.Send(new GetAllDifficultiesQuery());
+            return Ok(difficulties);
+        }
     }
 }
