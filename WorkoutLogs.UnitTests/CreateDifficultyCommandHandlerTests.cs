@@ -10,6 +10,7 @@ using WorkoutLogs.Application.Persistence;
 using WorkoutLogs.Application.Middleware;
 using FluentAssertions;
 using AutoMapper;
+using WorkoutLogs.Core;
 
 namespace WorkoutLogs.UnitTests
 {
@@ -31,8 +32,9 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var command = new CreateDifficultyCommand { Level = "Easy" };
+            var difficulty = new Difficulty { Level = "Easy" };
             var handler = new CreateDifficultyCommandHandler(_difficultyRepositoryMock.Object, _mapper.Object);
-
+            _mapper.Setup(m => m.Map<Difficulty>(command)).Returns(difficulty);
             // Act
             var result = await handler.Handle(command, CancellationToken.None);
 

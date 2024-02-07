@@ -33,7 +33,9 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var command = new CreateExerciseGroupCommand { Name = "Test Exercise Group", ExerciseTypeId = 1 };
+            var exerciseGroup = new ExerciseGroup { Name = "Test Exercise Group", ExerciseTypeId = 1 };
             var handler = new CreateExerciseGroupCommandHandler(_exerciseGroupRepositoryMock.Object, _exerciseTypeRepositoryMock.Object, _mapperMock.Object);
+            _mapperMock.Setup(m => m.Map<ExerciseGroup>(command)).Returns(exerciseGroup);
             _exerciseTypeRepositoryMock.Setup(repo => repo.ExerciseTypeExists(It.IsAny<int>(), CancellationToken.None)).ReturnsAsync(true);
 
             // Act

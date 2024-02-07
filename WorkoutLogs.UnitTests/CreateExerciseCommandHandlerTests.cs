@@ -9,6 +9,7 @@ using WorkoutLogs.Application.Middleware;
 using WorkoutLogs.Application.Persistence;
 using FluentAssertions;
 using AutoMapper;
+using WorkoutLogs.Core;
 
 namespace WorkoutLogs.UnitTests
 {
@@ -32,7 +33,9 @@ namespace WorkoutLogs.UnitTests
         {
             // Arrange
             var command = new CreateExerciseCommand { Name = "Test Exercise", TutorialUrl = "http://example.com", ExerciseGroupId = 1 };
+            var exercise = new Exercise { Name = "Test Exercise", TutorialUrl = "http://example.com", ExerciseGroupId = 1 };
             _exerciseGroupRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<int>())).ReturnsAsync(true);
+            _mapper.Setup(m => m.Map<Exercise>(command)).Returns(exercise);
             var handler = new CreateExerciseCommandHandler(_exerciseRepositoryMock.Object, _exerciseGroupRepositoryMock.Object, _mapper.Object);
 
             // Act

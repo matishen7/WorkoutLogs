@@ -51,6 +51,18 @@ namespace WorkoutLogs.UnitTests
                 DifficultyId = 3, 
                 AdditionalNotes = "This is a valid additional note."
             };
+            
+            var createExerciseLog = new ExerciseLog
+            {
+                MemberId = 1, 
+                Date = DateTime.Now,
+                ExerciseId = 2,
+                Sets = 3,
+                Reps = 10, 
+                Weight = 50,
+                DifficultyId = 3, 
+                AdditionalNotes = "This is a valid additional note."
+            };
 
 
             _memberRepositoryMock.Setup(repo => repo.MemberExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
@@ -59,6 +71,7 @@ namespace WorkoutLogs.UnitTests
                 .ReturnsAsync(true);
             _exerciseRepositoryMock.Setup(repo => repo.ExerciseExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
+            _mapper.Setup(m => m.Map<ExerciseLog>(command)).Returns(createExerciseLog);
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);
