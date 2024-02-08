@@ -15,6 +15,7 @@ namespace WorkoutLogs.Application.MappingProfiles
         public ExerciseGroupMappingProfiles()
         {
             CreateMap<ExerciseGroup, CreateExerciseGroupCommand>().ReverseMap();
+            CreateMap<ExerciseGroup, UpdateExerciseGroupCommand>().ReverseMap();
         }
     }
 }
