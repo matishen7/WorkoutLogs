@@ -12,8 +12,8 @@ using WorkoutLogs.Persistence.DbContexts;
 namespace WorkoutLogs.Persistence.Migrations
 {
     [DbContext(typeof(WorkoutLogsDbContext))]
-    [Migration("20240205213258_initial-migration")]
-    partial class initialmigration
+    [Migration("20240208212340_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,9 +119,6 @@ namespace WorkoutLogs.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -140,6 +137,9 @@ namespace WorkoutLogs.Persistence.Migrations
                     b.Property<int>("Reps")
                         .HasColumnType("int");
 
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Sets")
                         .HasColumnType("int");
 
@@ -153,6 +153,8 @@ namespace WorkoutLogs.Persistence.Migrations
                     b.HasIndex("ExerciseId");
 
                     b.HasIndex("MemberId");
+
+                    b.HasIndex("SessionId");
 
                     b.ToTable("ExerciseLogs");
                 });
@@ -211,6 +213,31 @@ namespace WorkoutLogs.Persistence.Migrations
                     b.ToTable("Members");
                 });
 
+            modelBuilder.Entity("WorkoutLogs.Core.Session", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sessions");
+                });
+
             modelBuilder.Entity("WorkoutLogs.Core.Exercise", b =>
                 {
                     b.HasOne("WorkoutLogs.Core.ExerciseGroup", "ExerciseGroup")
@@ -253,11 +280,24 @@ namespace WorkoutLogs.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WorkoutLogs.Core.Session", "Session")
+                        .WithMany("ExerciseLogs")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Difficulty");
 
                     b.Navigation("Exercise");
 
                     b.Navigation("Member");
+
+                    b.Navigation("Session");
+                });
+
+            modelBuilder.Entity("WorkoutLogs.Core.Session", b =>
+                {
+                    b.Navigation("ExerciseLogs");
                 });
 #pragma warning restore 612, 618
         }

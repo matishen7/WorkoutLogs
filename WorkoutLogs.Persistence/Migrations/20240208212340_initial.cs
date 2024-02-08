@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WorkoutLogs.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,6 +56,22 @@ namespace WorkoutLogs.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Members", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sessions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MemberId = table.Column<int>(type: "int", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sessions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,7 +126,7 @@ namespace WorkoutLogs.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MemberId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SessionId = table.Column<int>(type: "int", nullable: false),
                     ExerciseId = table.Column<int>(type: "int", nullable: false),
                     Sets = table.Column<int>(type: "int", nullable: false),
                     Reps = table.Column<int>(type: "int", nullable: false),
@@ -141,6 +157,12 @@ namespace WorkoutLogs.Persistence.Migrations
                         principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExerciseLogs_Sessions_SessionId",
+                        column: x => x.SessionId,
+                        principalTable: "Sessions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -164,6 +186,11 @@ namespace WorkoutLogs.Persistence.Migrations
                 column: "MemberId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExerciseLogs_SessionId",
+                table: "ExerciseLogs",
+                column: "SessionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Exercises_ExerciseGroupId",
                 table: "Exercises",
                 column: "ExerciseGroupId");
@@ -183,6 +210,9 @@ namespace WorkoutLogs.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Members");
+
+            migrationBuilder.DropTable(
+                name: "Sessions");
 
             migrationBuilder.DropTable(
                 name: "ExerciseGroups");

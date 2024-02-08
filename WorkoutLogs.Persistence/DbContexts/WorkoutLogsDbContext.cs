@@ -33,6 +33,12 @@ namespace WorkoutLogs.Persistence.DbContexts
                 property.SetColumnType("decimal(18,2)");
             }
 
+            modelBuilder.Entity<ExerciseLog>()
+             .HasOne(e => e.Session)
+             .WithMany(s => s.ExerciseLogs)
+             .HasForeignKey(e => e.SessionId)
+             .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(WorkoutLogsDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }

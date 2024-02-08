@@ -14,5 +14,6 @@ namespace WorkoutLogs.Core
         
         [Required]
         public int MemberId { get; set; }
+        public IEnumerable<ExerciseLog> ExerciseLogs { get; set; }
     }
 }

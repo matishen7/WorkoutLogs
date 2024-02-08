@@ -21,4 +21,8 @@
     <ProjectReference Include="..\WorkoutLogs.Core\WorkoutLogs.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
