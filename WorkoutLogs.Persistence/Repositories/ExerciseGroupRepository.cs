@@ -16,5 +16,12 @@ namespace WorkoutLogs.Persistence.Repositories
             .FirstOrDefault(x => x.Id == exerciseGroupId);
             return exerciseGroup != null;
         }
+
+        public async Task<IEnumerable<ExerciseGroup>> GetAllByExerciseTypeIdAsync(int exerciseTypeId)
+        {
+            var exerciseGroups = _context.ExerciseGroups
+            .Where(x => x.ExerciseTypeId == exerciseTypeId);
+            return exerciseGroups;
+        }
     }
 }

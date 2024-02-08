@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Commands;
+using WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Queries;
 using WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands;
 using WorkoutLogs.Core;
 
@@ -16,6 +17,7 @@ namespace WorkoutLogs.Application.MappingProfiles
         {
             CreateMap<ExerciseGroup, CreateExerciseGroupCommand>().ReverseMap();
             CreateMap<ExerciseGroup, UpdateExerciseGroupCommand>().ReverseMap();
+            CreateMap<ExerciseGroup, ExerciseGroupDto>().ReverseMap();
         }
     }
 }
