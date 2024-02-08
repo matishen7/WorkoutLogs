@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Commands;
+using WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Queries;
 using WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands;
 using WorkoutLogs.Application.Middleware;
 
@@ -57,6 +58,30 @@ namespace WorkoutLogs.Api.Controllers
             {
                 return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
             }
+        }
+
+        [HttpGet("byExerciseType/{exerciseTypeId}")]
+        public async Task<IActionResult> GetExerciseGroupsByExerciseTypeId(int exerciseTypeId, CancellationToken cancellationToken)
+        {
+            var query = new GetAllExerciseGroupsByExerciseTypeIdQuery { ExerciseTypeId = exerciseTypeId };
+            try
+            {
+                var exerciseGroupDtos = await _mediator.Send(query, cancellationToken);
+                return Ok(exerciseGroupDtos);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(new { Errors = ex.Errors });
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
+            }
+
         }
     }
 }
