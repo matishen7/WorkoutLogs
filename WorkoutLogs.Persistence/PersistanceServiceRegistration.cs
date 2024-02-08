@@ -14,6 +14,8 @@ namespace WorkoutLogs.Persistence
             services.AddDbContext<WorkoutLogsDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("WorkoutLogsDatabaseConnectionString"));
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
             });
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();

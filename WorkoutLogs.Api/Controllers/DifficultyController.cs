@@ -37,7 +37,7 @@ namespace WorkoutLogs.Api.Controllers
             }
         }
 
-        [HttpPost("Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> UpdateDifficulty([FromBody] UpdateDifficultyCommand command)
         {
             try
