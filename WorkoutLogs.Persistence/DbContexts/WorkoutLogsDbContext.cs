@@ -22,6 +22,7 @@ namespace WorkoutLogs.Persistence.DbContexts
         public DbSet<Member> Members { get; set; }
         public DbSet<ExerciseLog> ExerciseLogs { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Session> Sessions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -14,5 +14,6 @@ namespace WorkoutLogs.Application.Persistence
         Task DeleteAsync(T entity);
         Task<IReadOnlyList<T>> GetAsync();
         Task<T> GetByIdAsync(int id);
+        Task<bool> Exists(int id);
     }
 }

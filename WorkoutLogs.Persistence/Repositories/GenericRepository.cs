@@ -31,6 +31,14 @@ namespace WorkoutLogs.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> Exists(int id)
+        {
+            var entity = await _context.Set<T>()
+               .AsNoTracking()
+               .FirstOrDefaultAsync(x => x.Id == id);
+            return entity!=null;
+        }
+
         public async Task<IReadOnlyList<T>> GetAsync()
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();

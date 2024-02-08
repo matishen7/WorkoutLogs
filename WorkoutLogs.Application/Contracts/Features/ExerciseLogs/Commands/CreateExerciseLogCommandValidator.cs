@@ -22,7 +22,7 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseLogs.Commands
             _exerciseRepository = exerciseRepository;
 
             RuleFor(x => x.MemberId).NotEmpty().MustAsync(MemberExists).WithMessage("Member does not exist.");
-            RuleFor(x => x.Date).NotEmpty().WithMessage("Date is required.");
+            RuleFor(x => x.SessionId).NotEmpty().WithMessage("SessionId is required.");
             RuleFor(x => x.ExerciseId).NotEmpty().WithMessage("ExerciseId is required.").MustAsync(ExerciseExists).WithMessage("Exercise does not exist."); ;
             RuleFor(x => x.Sets).GreaterThan(0).WithMessage("Sets must be greater than 0.");
             RuleFor(x => x.Reps).GreaterThan(0).WithMessage("Reps must be greater than 0.");

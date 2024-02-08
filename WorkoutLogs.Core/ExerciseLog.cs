@@ -17,7 +17,10 @@ namespace WorkoutLogs.Core
         public Member Member { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public int SessionId { get; set; }
+
+        [ForeignKey("SessionId")]
+        public Session Session { get; set; }
 
         [Required]
         public int ExerciseId { get; set; }

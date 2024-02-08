@@ -43,7 +43,7 @@ namespace WorkoutLogs.UnitTests
             var command = new CreateExerciseLogCommand
             {
                 MemberId = 1, 
-                Date = DateTime.Now,
+                SessionId = 1,
                 ExerciseId = 2,
                 Sets = 3,
                 Reps = 10, 
@@ -55,8 +55,8 @@ namespace WorkoutLogs.UnitTests
             var createExerciseLog = new ExerciseLog
             {
                 MemberId = 1, 
-                Date = DateTime.Now,
                 ExerciseId = 2,
+                SessionId = 1,
                 Sets = 3,
                 Reps = 10, 
                 Weight = 50,
@@ -87,7 +87,7 @@ namespace WorkoutLogs.UnitTests
             var command = new CreateExerciseLogCommand
             {
                 MemberId = 0,
-                Date = DateTime.Now,
+                SessionId = 0,
                 ExerciseId = 0,
                 Sets = 0,
                 Reps = 0,
@@ -118,6 +118,9 @@ namespace WorkoutLogs.UnitTests
             ex.Errors.ContainsKey("Reps").Should().BeTrue();
             ex.Errors["Reps"].Should().Contain("Reps must be greater than 0.");
 
+            ex.Errors.ContainsKey("SessionId").Should().BeTrue();
+            ex.Errors["SessionId"].Should().Contain("SessionId is required.");
+
             ex.Errors.ContainsKey("Weight").Should().BeTrue();
             ex.Errors["Weight"].Should().Contain("Weight must be greater than 0.");
             _exerciseLogRepositoryMock.Verify(repo => repo.CreateAsync(It.IsAny<ExerciseLog>()), Times.Never);
@@ -129,7 +132,7 @@ namespace WorkoutLogs.UnitTests
             var command = new CreateExerciseLogCommand
             {
                 MemberId = 99,
-                Date = DateTime.Now,
+                SessionId = 1,
                 ExerciseId = 2,
                 Sets = 3,
                 Reps = 10,

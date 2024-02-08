@@ -8,9 +8,5 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseGroups.Queries
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public int ExerciseTypeId { get; set; }
-
-        public ExerciseType ExerciseType { get; set; }
     }
 }
