@@ -50,6 +50,10 @@ namespace WorkoutLogs.Api.Controllers
             {
                 return BadRequest(new { Errors = ex.Errors });
             }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred while processing the request {ex.Message}");

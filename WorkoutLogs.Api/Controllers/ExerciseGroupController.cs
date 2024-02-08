@@ -35,5 +35,28 @@ namespace WorkoutLogs.Api.Controllers
                 return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
             }
         }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateExerciseGroup([FromBody] UpdateExerciseGroupCommand command)
+        {
+            try
+            {
+                await _mediator.Send(command);
+
+                return Ok($"Exercise group is updated successfully with ID: {command.Id}");
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(new { Errors = ex.Errors });
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
+            }
+        }
     }
 }
