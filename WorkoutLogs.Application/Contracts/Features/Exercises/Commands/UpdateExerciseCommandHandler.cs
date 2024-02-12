@@ -41,11 +41,9 @@ namespace WorkoutLogs.Application.Contracts.Features.Exercises.Commands
                 throw new NotFoundException(nameof(Exercise), request.ExerciseId);
             }
 
-            var updatedExercise = _mapper.Map<Exercise>(request);
+            existingExercise.TutorialUrl = request.TutorialUrl;
 
-            updatedExercise.Id = existingExercise.Id;
-
-            await _exerciseRepository.UpdateAsync(updatedExercise);
+            await _exerciseRepository.UpdateAsync(existingExercise);
 
             return Unit.Value;
         }
