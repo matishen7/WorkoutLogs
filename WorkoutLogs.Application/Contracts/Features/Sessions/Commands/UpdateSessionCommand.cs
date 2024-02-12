@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace WorkoutLogs.Application.Contracts.Features.Sessions.Commands
 {
-   public class CreateSessionCommand : IRequest<int>
+    public class UpdateSessionCommand : IRequest<Unit>
     {
-        public int MemberId { get; set; }
-        public bool Ended { get; set; } = false;
+        public bool Ended { get; set; } = true;
+        public int Id { get; set; }
     }
-
 }
