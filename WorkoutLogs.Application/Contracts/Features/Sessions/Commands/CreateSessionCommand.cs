@@ -10,7 +10,6 @@ namespace WorkoutLogs.Application.Contracts.Features.Sessions.Commands
    public class CreateSessionCommand : IRequest<int>
     {
         public int MemberId { get; set; }
-        public bool Ended { get; set; } = false;
     }
 
 }

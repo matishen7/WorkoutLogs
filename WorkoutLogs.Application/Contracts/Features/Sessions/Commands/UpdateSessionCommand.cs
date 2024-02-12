@@ -9,7 +9,6 @@ namespace WorkoutLogs.Application.Contracts.Features.Sessions.Commands
 {
     public class UpdateSessionCommand : IRequest<Unit>
     {
-        public bool Ended { get; set; } = true;
         public int Id { get; set; }
     }
 }

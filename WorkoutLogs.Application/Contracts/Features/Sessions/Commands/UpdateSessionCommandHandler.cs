@@ -38,7 +38,7 @@ namespace WorkoutLogs.Application.Contracts.Features.Sessions.Commands
                 throw new NotFoundException(nameof(Session), request.Id);
             }
 
-            session.Ended = request.Ended;
+            session.Ended = true;
 
             await _sessionRepository.UpdateAsync(session);
 

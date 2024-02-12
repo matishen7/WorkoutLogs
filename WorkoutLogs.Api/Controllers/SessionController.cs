@@ -35,5 +35,28 @@ namespace WorkoutLogs.Api.Controllers
                 return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
             }
         }
+
+        [HttpPut("EndSession")]
+        public async Task<IActionResult> EndSession([FromBody] UpdateSessionCommand command)
+        {
+            try
+            {
+                await _mediator.Send(command);
+
+                return NoContent();
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(new { Errors = ex.Errors });
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
+            }
+        }
     }
 }
