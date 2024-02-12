@@ -44,7 +44,6 @@ namespace WorkoutLogs.Application.Contracts.Features.Exercises.Commands
             var updatedExercise = _mapper.Map<Exercise>(request);
 
             updatedExercise.Id = existingExercise.Id;
-            updatedExercise.ExerciseGroup = existingExercise.ExerciseGroup;
 
             await _exerciseRepository.UpdateAsync(updatedExercise);
 
