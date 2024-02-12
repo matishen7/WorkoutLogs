@@ -19,15 +19,8 @@ namespace WorkoutLogs.Application.Contracts.Features.Exercises.Commands
             _exerciseRepository = exerciseRepository;
 
             RuleFor(x => x.ExerciseId).GreaterThan(0).WithMessage("ExerciseId must be greater than 0");
-            RuleFor(x => x.Name).NotEmpty().MaximumLength(1000);
             RuleFor(x => x.TutorialUrl).NotEmpty();
-            RuleFor(x => x.ExerciseGroupId).NotEmpty().MustAsync(ExerciseGroupExists).WithMessage("Exercise group does not exist.");
             RuleFor(x => x.ExerciseId).MustAsync(ExerciseExists).WithMessage("Exercise with this ID does not exist.");
-        }
-
-        private async Task<bool> ExerciseGroupExists(int exerciseGroupId, CancellationToken cancellationToken)
-        {
-            return await _exerciseGroupRepository.ExistsAsync(exerciseGroupId);
         }
 
         private async Task<bool> ExerciseExists(int exerciseId, CancellationToken cancellationToken)

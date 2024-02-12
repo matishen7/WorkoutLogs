@@ -46,9 +46,7 @@ namespace WorkoutLogs.UnitTests
             var command = new UpdateExerciseCommand
             {
                 ExerciseId = 1,
-                Name = "Updated Exercise",
                 TutorialUrl = "http://updated-tutorial.com",
-                ExerciseGroupId = 1
             };
 
             var existingExercise = new Exercise { Id = 1 };
@@ -76,9 +74,7 @@ namespace WorkoutLogs.UnitTests
             var command = new UpdateExerciseCommand
             {
                 ExerciseId = 1,
-                Name = "Updated Exercise",
                 TutorialUrl = "http://updated-tutorial.com",
-                ExerciseGroupId = 1
             };
             _mockExerciseRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((Exercise)null);
             _mockExerciseRepository.Setup(repo => repo.Exists(It.IsAny<int>())).ReturnsAsync(true);
@@ -100,9 +96,7 @@ namespace WorkoutLogs.UnitTests
             var command = new UpdateExerciseCommand
             {
                 ExerciseId = 1,
-                Name = "Updated Exercise",
                 TutorialUrl = "http://updated-tutorial.com",
-                ExerciseGroupId = 1
             };
             _mockExerciseRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((new Exercise()));
             _mockExerciseRepository.Setup(repo => repo.Exists(It.IsAny<int>())).ReturnsAsync(false);
@@ -110,10 +104,8 @@ namespace WorkoutLogs.UnitTests
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<ValidationException>(() => handler.Handle(command, CancellationToken.None));
-            ex.Errors.ContainsKey("ExerciseGroupId").Should().BeTrue();
             ex.Errors.ContainsKey("ExerciseId").Should().BeTrue();
             ex.Errors["ExerciseId"].Should().Contain("Exercise with this ID does not exist.");
-            ex.Errors["ExerciseGroupId"].Should().Contain("Exercise group does not exist.");
         }
 
         [Test]
@@ -128,9 +120,7 @@ namespace WorkoutLogs.UnitTests
             var command = new UpdateExerciseCommand
             {
                 ExerciseId = 0,
-                Name = "",
                 TutorialUrl = "",
-                ExerciseGroupId = 0
             };
             _mockExerciseRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((new Exercise()));
             _mockExerciseRepository.Setup(repo => repo.Exists(It.IsAny<int>())).ReturnsAsync(false);
@@ -138,12 +128,9 @@ namespace WorkoutLogs.UnitTests
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<ValidationException>(() => handler.Handle(command, CancellationToken.None));
-            ex.Errors.ContainsKey("ExerciseGroupId").Should().BeTrue();
             ex.Errors.ContainsKey("TutorialUrl").Should().BeTrue();
-            ex.Errors.ContainsKey("Name").Should().BeTrue();
             ex.Errors.ContainsKey("ExerciseId").Should().BeTrue();
             ex.Errors["ExerciseId"].Should().Contain("ExerciseId must be greater than 0");
-            ex.Errors["ExerciseGroupId"].Should().Contain("'Exercise Group Id' must not be empty.");
         }
     }
 }
