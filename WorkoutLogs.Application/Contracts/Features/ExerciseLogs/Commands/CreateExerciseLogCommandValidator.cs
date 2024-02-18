@@ -13,16 +13,21 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseLogs.Commands
         private readonly IMemberRepository _memberRepository;
         private readonly IDifficultyRepository _difficultyRepository;
         private readonly IExerciseRepository _exerciseRepository;
+        private readonly ISessionRepository _sessionRepository;
         public CreateExerciseLogCommandValidator(IMemberRepository memberRepository, 
             IDifficultyRepository difficultyRepository, 
-            IExerciseRepository exerciseRepository)
+            IExerciseRepository exerciseRepository,
+            ISessionRepository sessionRepository)
         {
             _memberRepository = memberRepository;
             _difficultyRepository = difficultyRepository;
             _exerciseRepository = exerciseRepository;
+            _sessionRepository = sessionRepository;
 
             RuleFor(x => x.MemberId).NotEmpty().MustAsync(MemberExists).WithMessage("Member does not exist.");
-            RuleFor(x => x.SessionId).NotEmpty().WithMessage("SessionId is required.");
+            RuleFor(x => x.SessionId).NotEmpty().WithMessage("SessionId is required.")
+                .GreaterThan(0).WithMessage("Session Id must be greater than 0.")
+                .MustAsync(SessionExists).WithMessage("Session does not exist.");
             RuleFor(x => x.ExerciseId).NotEmpty().WithMessage("ExerciseId is required.").MustAsync(ExerciseExists).WithMessage("Exercise does not exist."); ;
             RuleFor(x => x.Sets).GreaterThan(0).WithMessage("Sets must be greater than 0.");
             RuleFor(x => x.Reps).GreaterThan(0).WithMessage("Reps must be greater than 0.");
@@ -42,6 +47,11 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseLogs.Commands
         private async Task<bool> DifficultyExists(int id, CancellationToken cancellationToken)
         {
             return await _difficultyRepository.DifficultyExists(id, cancellationToken);
+        }
+
+        private async Task<bool> SessionExists(int id, CancellationToken cancellationToken)
+        {
+            return await _sessionRepository.Exists(id);
         }
     }
 

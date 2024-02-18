@@ -18,6 +18,7 @@ namespace WorkoutLogs.UnitTests
         private Mock<IExerciseRepository> _exerciseRepositoryMock;
         private Mock<IMemberRepository> _memberRepositoryMock;
         private Mock<IDifficultyRepository> _difficultyRepositoryMock;
+        private Mock<ISessionRepository> _sessionRepositoryMock;
         private Mock<IMapper> _mapper;
         [SetUp]
         public void SetUp()
@@ -26,6 +27,7 @@ namespace WorkoutLogs.UnitTests
             _exerciseRepositoryMock = new Mock<IExerciseRepository>();
             _memberRepositoryMock = new Mock<IMemberRepository>();
             _difficultyRepositoryMock = new Mock<IDifficultyRepository>();
+            _sessionRepositoryMock = new Mock<ISessionRepository>();
             _mapper = new Mock<IMapper>();
 
             _handler = new CreateExerciseLogCommandHandler(
@@ -33,7 +35,8 @@ namespace WorkoutLogs.UnitTests
                 _exerciseRepositoryMock.Object,
                 _memberRepositoryMock.Object,
                 _difficultyRepositoryMock.Object,
-                _mapper.Object);
+                _mapper.Object,
+                _sessionRepositoryMock.Object);
         }
 
         [Test]
@@ -70,6 +73,8 @@ namespace WorkoutLogs.UnitTests
             _difficultyRepositoryMock.Setup(repo => repo.DifficultyExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
             _exerciseRepositoryMock.Setup(repo => repo.ExerciseExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
+            _sessionRepositoryMock.Setup(repo => repo.Exists(It.IsAny<int>()))
                 .ReturnsAsync(true);
             _mapper.Setup(m => m.Map<ExerciseLog>(command)).Returns(createExerciseLog);
 
@@ -148,6 +153,8 @@ namespace WorkoutLogs.UnitTests
                 .ReturnsAsync(false);
             _exerciseRepositoryMock.Setup(repo => repo.ExerciseExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
+            _sessionRepositoryMock.Setup(repo => repo.Exists(It.IsAny<int>()))
+                .ReturnsAsync(false);
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<ValidationException>(() => _handler.Handle(command, CancellationToken.None));
@@ -160,6 +167,43 @@ namespace WorkoutLogs.UnitTests
 
             ex.Errors.ContainsKey("DifficultyId").Should().BeTrue();
             ex.Errors["DifficultyId"].Should().Contain("Difficulty does not exist.");
+
+            ex.Errors.ContainsKey("SessionId").Should().BeTrue();
+            ex.Errors["SessionId"].Should().Contain("Session does not exist.");
+        }
+
+        [Test]
+        public async Task Handle_SessionIsEnded_ThrowsValidationException()
+        {
+            // Arrange
+            var command = new CreateExerciseLogCommand
+            {
+                MemberId = 99,
+                SessionId = 1,
+                ExerciseId = 2,
+                Sets = 3,
+                Reps = 10,
+                Weight = 50,
+                DifficultyId = 3,
+                AdditionalNotes = "This is a valid additional note."
+            };
+
+            // Setup
+            _memberRepositoryMock.Setup(repo => repo.MemberExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+               .ReturnsAsync(true);
+            _difficultyRepositoryMock.Setup(repo => repo.DifficultyExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
+            _exerciseRepositoryMock.Setup(repo => repo.ExerciseExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
+            _sessionRepositoryMock.Setup(repo => repo.Exists(It.IsAny<int>()))
+                .ReturnsAsync(true);
+
+            _sessionRepositoryMock.Setup(repo => repo.GetByIdAsync(It.IsAny<int>()))
+               .ReturnsAsync(new Session() { Ended = true});
+
+            // Act & Assert
+            var ex = Assert.ThrowsAsync<Exception>(() => _handler.Handle(command, CancellationToken.None));
+            ex.Message.Should().Contain("Session is ended.");
         }
     }
 
