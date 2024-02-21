@@ -18,6 +18,7 @@
 
 namespace WorkoutLogs.Presentation.Services.Base
 {
+    using WorkoutLogs.Application.Contracts.Features.Exercises.Queries;
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -79,12 +80,12 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ByGroupIdAsync(int groupId);
+        System.Threading.Tasks.Task<ExerciseDto> ByGroupIdAsync(int groupId);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ByGroupIdAsync(int groupId, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<ExerciseDto> ByGroupIdAsync(int groupId, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
