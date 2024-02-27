@@ -27,7 +27,7 @@ namespace WorkoutLogs.Presentation.Pages.Exercise
         [Inject]
         public IExerciseService ExerciseService { get; set; }
 
-        public List<ExerciseVM> Exercises { get; private set; }
+        public ICollection<ExerciseVM> Exercises { get; private set; }
         public string Message { get; set; } = string.Empty;
 
         protected void CreateExercise()

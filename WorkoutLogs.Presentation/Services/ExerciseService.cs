@@ -15,9 +15,9 @@ namespace WorkoutLogs.Presentation.Services
             this.mapper = mapper;
         }
 
-        public async Task<List<ExerciseVM>> GetByGroupIdAsync(int id)
+        public async Task<ICollection<ExerciseVM>> GetByGroupIdAsync(int id)
         {
-            List<ExerciseDto> exercises = await _client(id);
+            var exercises = await _client.ByGroupIdAsync(id);
             return mapper.Map<List<ExerciseVM>>(exercises);
         }
         public async Task<Response<Guid>> CreateLeaveType(ExerciseVM leaveType)
@@ -25,7 +25,7 @@ namespace WorkoutLogs.Presentation.Services
             try
             {
                 var createLeaveTypeCommand = mapper.Map<CreateExerciseCommand>(leaveType);
-                await _client.CreateExerciseAsync(createLeaveTypeCommand);
+                await _client.Create2Async(createLeaveTypeCommand);
                 return new Response<Guid>()
                 {
                     Success = true,

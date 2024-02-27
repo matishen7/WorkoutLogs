@@ -32,9 +32,8 @@ else
                     Name
                 </th>
                 <th>
-                    Default Days
+                    TutorialUrl
                 </th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -43,7 +42,7 @@ else
                 <tr>
                     <td>@exercise.Id </td>
                     <td>@exercise.Name </td>
-                    <td>@exercise.TutorialUrl </td>
+                    <td><a href="@exercise.TutorialUrl">@exercise.TutorialUrl</a></td>
                     @* <td>
                         <AuthorizeView Roles="Administrator">
                             <button @onclick=@(() => AllocateLeaveType(leaveType.Id))

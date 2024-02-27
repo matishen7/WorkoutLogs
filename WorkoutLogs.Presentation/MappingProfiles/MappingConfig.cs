@@ -1,7 +1,6 @@
 ﻿using WorkoutLogs.Presentation.Models.Exercise;
-using WorkoutLogs.Presentation.Services.Base;
 using AutoMapper;
-using WorkoutLogs.Application.Contracts.Features.Exercises.Queries;
+using WorkoutLogs.Presentation.Services.Base;
 
 namespace WorkoutLogs.Presentation.MappingProfiles
 {
