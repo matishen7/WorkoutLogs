@@ -37,7 +37,7 @@ namespace WorkoutLogs.Api.Controllers
         }
 
         [HttpGet("byGroupId/{groupId}")]
-        public async Task<IActionResult> GetExercisesByGroupId(int groupId)
+        public async Task<ActionResult<List<ExerciseDto>>> GetExercisesByGroupId(int groupId)
         {
             try
             {

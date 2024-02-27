@@ -2,8 +2,8 @@
 {
     public class BaseHttpService
     {
-        public IClient _client;
-        public BaseHttpService(IClient client) { _client = client; }
+        protected IClient _client;
+        protected BaseHttpService(IClient client) { _client = client; }
 
         protected Response<Guid> ConvertApiExceptions<Guid>(ApiException ex)
         {

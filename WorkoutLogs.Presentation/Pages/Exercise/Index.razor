@@ -1,0 +1,63 @@
+﻿@page "/exercises/"
+
+<h3>Exercises</h3>
+
+<div class="m-2 d-flex justify-content-end">
+    <button @onclick="CreateExercise" class="btn btn-success">Add Exercise</button>
+</div>
+
+@if (string.IsNullOrEmpty(Message) == false)
+{
+    <div class="alert alert-danger">
+        @Message
+    </div>
+}
+
+
+
+<div clas></div>
+@if (Exercises == null)
+{
+    <p>Loading Data...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Default Days
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var exercise in Exercises)
+            {
+                <tr>
+                    <td>@exercise.Id </td>
+                    <td>@exercise.Name </td>
+                    <td>@exercise.TutorialUrl </td>
+                    @* <td>
+                        <AuthorizeView Roles="Administrator">
+                            <button @onclick=@(() => AllocateLeaveType(leaveType.Id))
+                                    class="btn btn-dark">
+                                Allocate Leave
+                            </button>
+                            <button @onclick="@(() => EditLeaveType(leaveType.Id))" class="btn btn-warning">Edit</button>
+                            <button @onclick="@(() => DeleteLeaveType(leaveType.Id))" class="btn btn-danger">Delete</button>
+                        </AuthorizeView>
+                        <button @onclick="@(() => DetailsLeaveType(leaveType.Id))" class="btn btn-info">Details</button>
+                    </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutLogs.UnitTests", "Wo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C7E17200-E1EF-4C71-B17E-ABF7396DF7BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutLogs.Presentation", "WorkoutLogs.Presentation\WorkoutLogs.Presentation.csproj", "{EE715695-AAC7-430E-B845-F31BDDDC7F05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutLogs.Presentation", "WorkoutLogs.Presentation\WorkoutLogs.Presentation.csproj", "{EE715695-AAC7-430E-B845-F31BDDDC7F05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

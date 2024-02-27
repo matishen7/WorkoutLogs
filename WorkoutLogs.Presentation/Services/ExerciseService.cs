@@ -15,10 +15,10 @@ namespace WorkoutLogs.Presentation.Services
             this.mapper = mapper;
         }
 
-        public async Task<ExerciseVM> GetByGroupIdAsync(int id)
+        public async Task<List<ExerciseVM>> GetByGroupIdAsync(int id)
         {
-            ExerciseDto exercises = await _client.ByGroupIdAsync(id);
-            return mapper.Map<ExerciseVM>(exercises);
+            List<ExerciseDto> exercises = await _client(id);
+            return mapper.Map<List<ExerciseVM>>(exercises);
         }
         public async Task<Response<Guid>> CreateLeaveType(ExerciseVM leaveType)
         {

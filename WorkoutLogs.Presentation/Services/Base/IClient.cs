@@ -2,6 +2,6 @@
 {
     public partial interface IClient
     {
-        public HttpClient HttpClient { get; set; }
+        public HttpClient HttpClient { get; }
     }
 }
