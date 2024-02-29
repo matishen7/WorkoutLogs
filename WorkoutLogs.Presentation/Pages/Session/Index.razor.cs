@@ -27,17 +27,41 @@ namespace WorkoutLogs.Presentation.Pages.Session
         [Inject]
         public ISessionService SessionService { get; set; }
 
-        public int SessionId { get; private set; }
+        public int CurrentSessionId { get; private set; }
         public string Message { get; set; } = string.Empty;
 
         protected async Task CreateSession()
         {
+            if (CurrentSessionId != 0)
+            {
+                Message = "You need to end current session before creating new workout session.";
+                return;
+            }
+
             var createSessionResponse = await SessionService.CreateSession(2, CancellationToken.None);
+            if (createSessionResponse.Success == true)
+            {
+                CurrentSessionId = createSessionResponse.Data;
+                Message = "New workout session created. Enjoy!";
+            }
+            else
+            {
+                CurrentSessionId = 0;
+                Message = "Something went wrong with creating workout session! Try again later..";
+            }
         }
 
         protected async Task EndSession()
         {
-            await SessionService.EndSession(SessionId, CancellationToken.None);
+            var endSessionResponse = await SessionService.EndSession(CurrentSessionId, CancellationToken.None);
+            if (endSessionResponse.Success == true)
+            {
+                Message = "Workout session ended. Thanks!";
+            }
+            else
+            {
+                Message = "Something went wrong with ending workout session! Try again later..";
+            }
         }
     }
 }

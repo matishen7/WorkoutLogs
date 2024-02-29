@@ -3,8 +3,19 @@
 
 
 
-<div class="m-2 d-flex justify-content-end">
+<div class="m-2 d-flex justify-content-middle">
     <button @onclick="CreateSession" class="btn btn-success">New session</button>
+</div>
+
+@if (string.IsNullOrEmpty(Message) == false)
+{
+    <div class="alert alert-warning">
+        @Message
+    </div>
+}
+
+<div class="m-2 d-flex justify-content-middle">
+    <button @onclick="EndSession" class="btn btn-success">End session</button>
 </div>
 
 

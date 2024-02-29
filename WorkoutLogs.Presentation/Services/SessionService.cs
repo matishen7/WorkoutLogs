@@ -13,21 +13,22 @@ namespace WorkoutLogs.Presentation.Services
         }
 
 
-        public async Task<Response<Guid>> CreateSession(int memberId, CancellationToken cancellationToken)
+        public async Task<Response<int>> CreateSession(int memberId, CancellationToken cancellationToken)
         {
             try
             {
                 var createSessionCommand = new CreateSessionCommand() { MemberId = 2 };
                 var id = await _client.CreateSessionAsync(createSessionCommand);
-                return new Response<Guid>()
+                return new Response<int>()
                 {
+                    Data = id,
                     Success = true,
                 };
             }
             catch (ApiException ex)
             {
 
-                return ConvertApiExceptions<Guid>(ex);
+                return ConvertApiExceptions<int>(ex);
             }
         }
 
