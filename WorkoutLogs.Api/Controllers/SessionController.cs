@@ -18,13 +18,13 @@ namespace WorkoutLogs.Api.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> CreateSession([FromBody] CreateSessionCommand command)
+        public async Task<ActionResult<int>> CreateSession([FromBody] CreateSessionCommand command)
         {
             try
             {
                 var id = await _mediator.Send(command);
 
-                return Ok($"Session created successfully with ID: {id}");
+                return Ok(id);
             }
             catch (ValidationException ex)
             {

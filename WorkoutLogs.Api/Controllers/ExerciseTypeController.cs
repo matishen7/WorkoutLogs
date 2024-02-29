@@ -16,14 +16,14 @@ namespace WorkoutLogs.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> CreateExerciseType([FromBody] CreateExerciseTypeCommand createExerciseTypeCommand)
+        [HttpPost("CreateExerciseType")]
+        public async Task<ActionResult<int>> CreateExerciseType([FromBody] CreateExerciseTypeCommand createExerciseTypeCommand)
         {
             try
             {
                 var exerciseTypeId = await _mediator.Send(createExerciseTypeCommand);
 
-                return Ok($"Exercise type is created successfully with ID: {exerciseTypeId}");
+                return Ok(exerciseTypeId);
             }
             catch (ValidationException ex)
             {

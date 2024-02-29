@@ -17,14 +17,14 @@ namespace WorkoutLogs.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> CreateExerciseLog([FromBody] CreateExerciseLogCommand createExerciseLogCommand)
+        [HttpPost("CreateExerciseLog")]
+        public async Task<ActionResult<int>> CreateExerciseLog([FromBody] CreateExerciseLogCommand createExerciseLogCommand)
         {
             try
             {
                 var id = await _mediator.Send(createExerciseLogCommand);
 
-                return Ok($"Exercise log is created successfully with ID: {id}");
+                return Ok(id);
             }
             catch (ValidationException ex)
             {

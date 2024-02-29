@@ -18,14 +18,14 @@ namespace WorkoutLogs.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> CreateDifficulty([FromBody] CreateDifficultyCommand createDifficultyCommand)
+        [HttpPost("CreateDifficulty")]
+        public async Task<ActionResult<int>> CreateDifficulty([FromBody] CreateDifficultyCommand createDifficultyCommand)
         {
             try
             {
                 var id = await _mediator.Send(createDifficultyCommand);
 
-                return Ok($"Difficulty level is created successfully with ID: {id}");
+                return Ok(id);
             }
             catch (ValidationException ex)
             {
@@ -37,7 +37,7 @@ namespace WorkoutLogs.Api.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut("UpdateDifficulty")]
         public async Task<IActionResult> UpdateDifficulty([FromBody] UpdateDifficultyCommand command)
         {
             try
@@ -61,7 +61,7 @@ namespace WorkoutLogs.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDifficultyById(int id)
+        public async Task<ActionResult<DifficultyDto>> GetDifficultyById(int id)
         {
             try
             {

@@ -18,14 +18,14 @@ namespace WorkoutLogs.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> CreateExerciseGroup([FromBody] CreateExerciseGroupCommand createExerciseGroupCommand)
+        [HttpPost("CreateExerciseGroup")]
+        public async Task<ActionResult<int>> CreateExerciseGroup([FromBody] CreateExerciseGroupCommand createExerciseGroupCommand)
         {
             try
             {
                 var exerciseGroupId = await _mediator.Send(createExerciseGroupCommand);
 
-                return Ok($"Exercise group is created successfully with ID: {exerciseGroupId}");
+                return Ok(exerciseGroupId);
             }
             catch (ValidationException ex)
             {
@@ -37,14 +37,14 @@ namespace WorkoutLogs.Api.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut("UpdateExerciseGroup")]
         public async Task<IActionResult> UpdateExerciseGroup([FromBody] UpdateExerciseGroupCommand command)
         {
             try
             {
                 await _mediator.Send(command);
 
-                return Ok($"Exercise group is updated successfully with ID: {command.Id}");
+                return NoContent();
             }
             catch (ValidationException ex)
             {
@@ -61,7 +61,7 @@ namespace WorkoutLogs.Api.Controllers
         }
 
         [HttpGet("byExerciseType/{exerciseTypeId}")]
-        public async Task<IActionResult> GetExerciseGroupsByExerciseTypeId(int exerciseTypeId, CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<ExerciseGroupDto>>> GetExerciseGroupsByExerciseTypeId(int exerciseTypeId, CancellationToken cancellationToken)
         {
             var query = new GetAllExerciseGroupsByExerciseTypeIdQuery { ExerciseTypeId = exerciseTypeId };
             try
