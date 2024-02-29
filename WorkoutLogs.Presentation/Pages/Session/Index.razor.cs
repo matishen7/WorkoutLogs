@@ -53,9 +53,11 @@ namespace WorkoutLogs.Presentation.Pages.Session
 
         protected async Task EndSession()
         {
+            if (CurrentSessionId == 0) { Message = "Please, create new workout session first!"; return; }
             var endSessionResponse = await SessionService.EndSession(CurrentSessionId, CancellationToken.None);
             if (endSessionResponse.Success == true)
             {
+                CurrentSessionId = 0;
                 Message = "Workout session ended. Thanks!";
             }
             else
