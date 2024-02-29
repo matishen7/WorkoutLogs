@@ -32,7 +32,7 @@ namespace WorkoutLogs.Presentation.Pages.Exercise
 
         protected void CreateExercise()
         {
-            NavigationManager.NavigateTo("/Exercises/Create");
+            NavigationManager.NavigateTo("/Exercises/CreateExercise");
         }
 
         protected void GetByGroupId(int groupId)

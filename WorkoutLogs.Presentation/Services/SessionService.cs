@@ -18,7 +18,7 @@ namespace WorkoutLogs.Presentation.Services
             try
             {
                 var createSessionCommand = new CreateSessionCommand() { MemberId = 2 };
-                await _client.CreateAsync(createSessionCommand);
+                var id = await _client.CreateSessionAsync(createSessionCommand);
                 return new Response<Guid>()
                 {
                     Success = true,
@@ -31,9 +31,22 @@ namespace WorkoutLogs.Presentation.Services
             }
         }
 
-        public Task<Response<Guid>> EndSession(int id, CancellationToken cancellationToken)
+        public async Task<Response<Guid>> EndSession(int id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var updateSessionCommand = new UpdateSessionCommand() { Id = id };
+                await _client.EndSessionAsync(updateSessionCommand);
+                return new Response<Guid>()
+                {
+                    Success = true,
+                };
+            }
+            catch (ApiException ex)
+            {
+
+                return ConvertApiExceptions<Guid>(ex);
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ using WorkoutLogs.Presentation;
 using WorkoutLogs.Presentation.Shared;
 using WorkoutLogs.Presentation.Contracts;
 using WorkoutLogs.Presentation.Models.Exercise;
+using WorkoutLogs.Presentation.Services;
 
 namespace WorkoutLogs.Presentation.Pages.Session
 {
@@ -29,14 +30,14 @@ namespace WorkoutLogs.Presentation.Pages.Session
         public int SessionId { get; private set; }
         public string Message { get; set; } = string.Empty;
 
-        protected void CreateSession()
+        protected async Task CreateSession()
         {
-            NavigationManager.NavigateTo("/Session/Create");
+            var createSessionResponse = await SessionService.CreateSession(2, CancellationToken.None);
         }
 
-        protected void EndSession(int id)
+        protected async Task EndSession()
         {
-            NavigationManager.NavigateTo($"/Session/End/{id}");
+            await SessionService.EndSession(SessionId, CancellationToken.None);
         }
     }
 }
