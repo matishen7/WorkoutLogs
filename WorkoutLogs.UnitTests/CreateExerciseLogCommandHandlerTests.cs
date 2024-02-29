@@ -75,7 +75,9 @@ namespace WorkoutLogs.UnitTests
             _exerciseRepositoryMock.Setup(repo => repo.ExerciseExists(It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
             _sessionRepositoryMock.Setup(repo => repo.Exists(It.IsAny<int>()))
-                .ReturnsAsync(true);
+                .ReturnsAsync(true); 
+            _sessionRepositoryMock.Setup(repo => repo.GetByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(new Session() { Id = 1});
             _mapper.Setup(m => m.Map<ExerciseLog>(command)).Returns(createExerciseLog);
 
             // Act
