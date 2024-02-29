@@ -17,7 +17,7 @@ namespace WorkoutLogs.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Create")]
+        [HttpPost("CreateSession")]
         public async Task<ActionResult<int>> CreateSession([FromBody] CreateSessionCommand command)
         {
             try

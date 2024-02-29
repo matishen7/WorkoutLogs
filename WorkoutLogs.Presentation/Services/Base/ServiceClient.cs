@@ -25,30 +25,30 @@ namespace WorkoutLogs.Presentation.Services.Base
     {
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CreateAsync(CreateDifficultyCommand body);
+        System.Threading.Tasks.Task<int> CreateDifficultyAsync(CreateDifficultyCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CreateAsync(CreateDifficultyCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> CreateDifficultyAsync(CreateDifficultyCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateAsync(UpdateDifficultyCommand body);
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateAsync(UpdateDifficultyCommand body, System.Threading.CancellationToken cancellationToken);
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DifficultyGETAsync(int id);
+        System.Threading.Tasks.Task UpdateDifficultyAsync(UpdateDifficultyCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DifficultyGETAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task UpdateDifficultyAsync(UpdateDifficultyCommand body, System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<DifficultyDto> DifficultyGETAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<DifficultyDto> DifficultyGETAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -70,12 +70,12 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create2Async(CreateExerciseCommand body);
+        System.Threading.Tasks.Task<int> CreateExerciseAsync(CreateExerciseCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create2Async(CreateExerciseCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> CreateExerciseAsync(CreateExerciseCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -97,57 +97,57 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create3Async(CreateExerciseGroupCommand body);
+        System.Threading.Tasks.Task<int> CreateExerciseGroupAsync(CreateExerciseGroupCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create3Async(CreateExerciseGroupCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> CreateExerciseGroupAsync(CreateExerciseGroupCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Update2Async(UpdateExerciseGroupCommand body);
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Update2Async(UpdateExerciseGroupCommand body, System.Threading.CancellationToken cancellationToken);
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ByExerciseTypeAsync(int exerciseTypeId);
+        System.Threading.Tasks.Task UpdateExerciseGroupAsync(UpdateExerciseGroupCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ByExerciseTypeAsync(int exerciseTypeId, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task UpdateExerciseGroupAsync(UpdateExerciseGroupCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create4Async(CreateExerciseLogCommand body);
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create4Async(CreateExerciseLogCommand body, System.Threading.CancellationToken cancellationToken);
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create5Async(CreateExerciseTypeCommand body);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ExerciseGroupDto>> ByExerciseTypeAsync(int exerciseTypeId);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create5Async(CreateExerciseTypeCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ExerciseGroupDto>> ByExerciseTypeAsync(int exerciseTypeId, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create6Async(CreateSessionCommand body);
+        System.Threading.Tasks.Task<int> CreateExerciseLogAsync(CreateExerciseLogCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task Create6Async(CreateSessionCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> CreateExerciseLogAsync(CreateExerciseLogCommand body, System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<int> CreateExerciseTypeAsync(CreateExerciseTypeCommand body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<int> CreateExerciseTypeAsync(CreateExerciseTypeCommand body, System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<int> CreateAsync(CreateSessionCommand body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<int> CreateAsync(CreateSessionCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -192,15 +192,15 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CreateAsync(CreateDifficultyCommand body)
+        public virtual System.Threading.Tasks.Task<int> CreateDifficultyAsync(CreateDifficultyCommand body)
         {
-            return CreateAsync(body, System.Threading.CancellationToken.None);
+            return CreateDifficultyAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CreateAsync(CreateDifficultyCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> CreateDifficultyAsync(CreateDifficultyCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -213,11 +213,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
-                    // Operation Path: "api/Difficulty/Create"
-                    urlBuilder_.Append("api/Difficulty/Create");
+                    // Operation Path: "api/Difficulty/CreateDifficulty"
+                    urlBuilder_.Append("api/Difficulty/CreateDifficulty");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -244,7 +245,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -268,15 +274,15 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task UpdateAsync(UpdateDifficultyCommand body)
+        public virtual System.Threading.Tasks.Task UpdateDifficultyAsync(UpdateDifficultyCommand body)
         {
-            return UpdateAsync(body, System.Threading.CancellationToken.None);
+            return UpdateDifficultyAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task UpdateAsync(UpdateDifficultyCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task UpdateDifficultyAsync(UpdateDifficultyCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -292,8 +298,8 @@ namespace WorkoutLogs.Presentation.Services.Base
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
-                    // Operation Path: "api/Difficulty/Update"
-                    urlBuilder_.Append("api/Difficulty/Update");
+                    // Operation Path: "api/Difficulty/UpdateDifficulty"
+                    urlBuilder_.Append("api/Difficulty/UpdateDifficulty");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -344,7 +350,7 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task DifficultyGETAsync(int id)
+        public virtual System.Threading.Tasks.Task<DifficultyDto> DifficultyGETAsync(int id)
         {
             return DifficultyGETAsync(id, System.Threading.CancellationToken.None);
         }
@@ -352,7 +358,7 @@ namespace WorkoutLogs.Presentation.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task DifficultyGETAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<DifficultyDto> DifficultyGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -364,6 +370,7 @@ namespace WorkoutLogs.Presentation.Services.Base
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -396,7 +403,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<DifficultyDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -574,15 +586,15 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Create2Async(CreateExerciseCommand body)
+        public virtual System.Threading.Tasks.Task<int> CreateExerciseAsync(CreateExerciseCommand body)
         {
-            return Create2Async(body, System.Threading.CancellationToken.None);
+            return CreateExerciseAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Create2Async(CreateExerciseCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> CreateExerciseAsync(CreateExerciseCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -595,11 +607,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
-                    // Operation Path: "api/Exercise/Create"
-                    urlBuilder_.Append("api/Exercise/Create");
+                    // Operation Path: "api/Exercise/CreateExercise"
+                    urlBuilder_.Append("api/Exercise/CreateExercise");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -626,7 +639,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -808,15 +826,15 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Create3Async(CreateExerciseGroupCommand body)
+        public virtual System.Threading.Tasks.Task<int> CreateExerciseGroupAsync(CreateExerciseGroupCommand body)
         {
-            return Create3Async(body, System.Threading.CancellationToken.None);
+            return CreateExerciseGroupAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Create3Async(CreateExerciseGroupCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> CreateExerciseGroupAsync(CreateExerciseGroupCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -829,11 +847,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
-                    // Operation Path: "api/ExerciseGroup/Create"
-                    urlBuilder_.Append("api/ExerciseGroup/Create");
+                    // Operation Path: "api/ExerciseGroup/CreateExerciseGroup"
+                    urlBuilder_.Append("api/ExerciseGroup/CreateExerciseGroup");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -860,7 +879,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -884,15 +908,15 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Update2Async(UpdateExerciseGroupCommand body)
+        public virtual System.Threading.Tasks.Task UpdateExerciseGroupAsync(UpdateExerciseGroupCommand body)
         {
-            return Update2Async(body, System.Threading.CancellationToken.None);
+            return UpdateExerciseGroupAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Update2Async(UpdateExerciseGroupCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task UpdateExerciseGroupAsync(UpdateExerciseGroupCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -908,8 +932,8 @@ namespace WorkoutLogs.Presentation.Services.Base
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
-                    // Operation Path: "api/ExerciseGroup/Update"
-                    urlBuilder_.Append("api/ExerciseGroup/Update");
+                    // Operation Path: "api/ExerciseGroup/UpdateExerciseGroup"
+                    urlBuilder_.Append("api/ExerciseGroup/UpdateExerciseGroup");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -960,7 +984,7 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task ByExerciseTypeAsync(int exerciseTypeId)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ExerciseGroupDto>> ByExerciseTypeAsync(int exerciseTypeId)
         {
             return ByExerciseTypeAsync(exerciseTypeId, System.Threading.CancellationToken.None);
         }
@@ -968,7 +992,7 @@ namespace WorkoutLogs.Presentation.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task ByExerciseTypeAsync(int exerciseTypeId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ExerciseGroupDto>> ByExerciseTypeAsync(int exerciseTypeId, System.Threading.CancellationToken cancellationToken)
         {
             if (exerciseTypeId == null)
                 throw new System.ArgumentNullException("exerciseTypeId");
@@ -980,6 +1004,7 @@ namespace WorkoutLogs.Presentation.Services.Base
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -1012,7 +1037,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<ExerciseGroupDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1036,15 +1066,15 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Create4Async(CreateExerciseLogCommand body)
+        public virtual System.Threading.Tasks.Task<int> CreateExerciseLogAsync(CreateExerciseLogCommand body)
         {
-            return Create4Async(body, System.Threading.CancellationToken.None);
+            return CreateExerciseLogAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Create4Async(CreateExerciseLogCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> CreateExerciseLogAsync(CreateExerciseLogCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1057,11 +1087,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
-                    // Operation Path: "api/ExerciseLog/Create"
-                    urlBuilder_.Append("api/ExerciseLog/Create");
+                    // Operation Path: "api/ExerciseLog/CreateExerciseLog"
+                    urlBuilder_.Append("api/ExerciseLog/CreateExerciseLog");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1088,7 +1119,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1112,15 +1148,15 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Create5Async(CreateExerciseTypeCommand body)
+        public virtual System.Threading.Tasks.Task<int> CreateExerciseTypeAsync(CreateExerciseTypeCommand body)
         {
-            return Create5Async(body, System.Threading.CancellationToken.None);
+            return CreateExerciseTypeAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Create5Async(CreateExerciseTypeCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> CreateExerciseTypeAsync(CreateExerciseTypeCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1133,11 +1169,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
-                    // Operation Path: "api/ExerciseType/Create"
-                    urlBuilder_.Append("api/ExerciseType/Create");
+                    // Operation Path: "api/ExerciseType/CreateExerciseType"
+                    urlBuilder_.Append("api/ExerciseType/CreateExerciseType");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1164,7 +1201,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1188,15 +1230,15 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Create6Async(CreateSessionCommand body)
+        public virtual System.Threading.Tasks.Task<int> CreateAsync(CreateSessionCommand body)
         {
-            return Create6Async(body, System.Threading.CancellationToken.None);
+            return CreateAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Create6Async(CreateSessionCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> CreateAsync(CreateSessionCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1209,6 +1251,7 @@ namespace WorkoutLogs.Presentation.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -1240,7 +1283,12 @@ namespace WorkoutLogs.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1555,6 +1603,18 @@ namespace WorkoutLogs.Presentation.Services.Base
 
         [System.Text.Json.Serialization.JsonPropertyName("tutorialUrl")]
         public string TutorialUrl { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ExerciseGroupDto
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
     }
 

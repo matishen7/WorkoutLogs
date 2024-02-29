@@ -6,6 +6,6 @@ namespace WorkoutLogs.Presentation.Contracts
     public interface IExerciseService
     {
         Task<ICollection<ExerciseVM>> GetByGroupIdAsync(int id);
-        Task<Response<Guid>> CreateLeaveType(ExerciseVM exerciseVM);
+        Task<Response<Guid>> CreateExercise(ExerciseVM exerciseVM);
     }
 }

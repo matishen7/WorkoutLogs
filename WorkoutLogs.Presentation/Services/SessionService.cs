@@ -18,7 +18,7 @@ namespace WorkoutLogs.Presentation.Services
             try
             {
                 var createSessionCommand = new CreateSessionCommand() { MemberId = 2 };
-                await _client.Create6Async(createSessionCommand);
+                await _client.CreateAsync(createSessionCommand);
                 return new Response<Guid>()
                 {
                     Success = true,
