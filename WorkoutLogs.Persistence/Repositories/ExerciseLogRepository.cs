@@ -15,5 +15,11 @@ namespace WorkoutLogs.Persistence.Repositories
         public ExerciseLogRepository(WorkoutLogsDbContext context) : base(context)
         {
         }
+
+        public async Task<IEnumerable<ExerciseLog>> GetExerciseLogsBySessionId(int id)
+        {
+            var exerciseLogs = _context.ExerciseLogs.Where(x => x.SessionId == id);
+            return exerciseLogs;
+        }
     }
 }

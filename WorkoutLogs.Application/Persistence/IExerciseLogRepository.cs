@@ -9,5 +9,6 @@ namespace WorkoutLogs.Application.Persistence
 {
     public interface IExerciseLogRepository : IGenericRepository<ExerciseLog>
     {
+        public Task<IEnumerable<ExerciseLog>> GetExerciseLogsBySessionId(int id);
     }
 }
