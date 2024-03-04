@@ -1,11 +1,5 @@
 ﻿@page "/session/"
-<h3>Session</h3>
-
-
-
-<div class="m-2 d-flex justify-content-middle">
-    <button @onclick="CreateSession" class="btn btn-success">New session</button>
-</div>
+<title>Workout Session</title>
 
 @if (string.IsNullOrEmpty(Message) == false)
 {
@@ -13,6 +7,8 @@
         @Message
     </div>
 }
+
+
 
 <div class="m-2 d-flex justify-content-middle">
     <button @onclick="EndSession" class="btn btn-success">End session</button>

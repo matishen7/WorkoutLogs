@@ -18,8 +18,4 @@
     <ProjectReference Include="..\WorkoutLogs.Core\WorkoutLogs.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contracts\Features\ExerciseTypes\Queries\" />
-  </ItemGroup>
-
 </Project>

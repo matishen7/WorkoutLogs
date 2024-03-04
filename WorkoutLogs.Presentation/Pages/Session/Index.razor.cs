@@ -65,5 +65,10 @@ namespace WorkoutLogs.Presentation.Pages.Session
                 Message = "Something went wrong with ending workout session! Try again later..";
             }
         }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await CreateSession();
+        }
     }
 }

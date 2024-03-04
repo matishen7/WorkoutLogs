@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Commands;
+using WorkoutLogs.Application.Contracts.Features.ExerciseTypes.Queries;
 using WorkoutLogs.Application.Middleware;
 
 namespace WorkoutLogs.Api.Controllers
@@ -24,6 +25,25 @@ namespace WorkoutLogs.Api.Controllers
                 var exerciseTypeId = await _mediator.Send(createExerciseTypeCommand);
 
                 return Ok(exerciseTypeId);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(new { Errors = ex.Errors });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while processing the request {ex.Message}");
+            }
+        }
+
+        [HttpPost("GetAll")]
+        public async Task<ActionResult<List<ExerciseTypeDto>>> GetAllExerciseTypes([FromBody] GetAllExerciseTypesQuery getAllExerciseTypesCommand)
+        {
+            try
+            {
+                var exerciseTypes = await _mediator.Send(getAllExerciseTypesCommand);
+
+                return Ok(exerciseTypes);
             }
             catch (ValidationException ex)
             {
