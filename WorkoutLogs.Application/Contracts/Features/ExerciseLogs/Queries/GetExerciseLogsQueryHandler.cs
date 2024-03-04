@@ -32,7 +32,7 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseLogs.Queries
                 throw new NotFoundException(nameof(sessionId), request.SessionId);
             }
 
-            var exerciseLogs = _exerciseLogRepository.GetExerciseLogsBySessionId(request.SessionId);
+            var exerciseLogs = await _exerciseLogRepository.GetExerciseLogsBySessionId(request.SessionId);
             return _mapper.Map<List<ExerciseLogDto>>(exerciseLogs);
         }
     }
