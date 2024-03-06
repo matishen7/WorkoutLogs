@@ -22,6 +22,9 @@ namespace WorkoutLogs.Presentation.Pages.Session
 {
     public partial class Index
     {
+        [Parameter]
+        public int exerciseTypeId { get; set; }
+
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
@@ -32,16 +35,13 @@ namespace WorkoutLogs.Presentation.Pages.Session
         public IExerciseGroupService ExerciseGroupService { get; set; }
 
         [Inject]
-        public IExerciseTypeService ExerciseTypeService { get; set; }
-
-        [Inject]
         public IExerciseLogService ExerciseLogService { get; set; }
 
         public int CurrentSessionId { get; private set; }
         public string Message { get; set; } = string.Empty;
 
         public ICollection<ExerciseTypeDto> ExerciseTypes { get; set; } = new List<ExerciseTypeDto>();
-        public ICollection<List<ExerciseGroupDto>> ExerciseGroups { get; set; } = new List<List<ExerciseGroupDto>>();
+        public ICollection<ExerciseGroupDto> ExerciseGroups { get; set; } = new List<ExerciseGroupDto>();
         public ICollection<ExerciseLogDto> ExerciseLogs { get; set; } = new List<ExerciseLogDto>();
 
         protected async Task CreateSession()
@@ -80,20 +80,15 @@ namespace WorkoutLogs.Presentation.Pages.Session
             }
         }
 
-        protected async Task LoadExerciseGroups()
+        protected async Task LoadExerciseGroups(int exerciseTypeId)
         {
-            ExerciseTypes = await ExerciseTypeService.GetAllExerciseTypes();
-            foreach (var exerciseType in ExerciseTypes)
-            {
-                var exerciseGroups = await ExerciseGroupService.GetExerciseGroupsAsync(exerciseType.Id);
-                ExerciseGroups.Add(exerciseGroups.ToList());
-            }
+            ExerciseGroups = await ExerciseGroupService.GetExerciseGroupsAsync(exerciseTypeId);
         }
 
         protected override async Task OnInitializedAsync()
         {
             await CreateSession();
-            await LoadExerciseGroups();
+            if (exerciseTypeId != 0) await LoadExerciseGroups(exerciseTypeId);
         }
     }
 }

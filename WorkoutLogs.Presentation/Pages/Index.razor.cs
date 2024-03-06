@@ -22,7 +22,7 @@ namespace WorkoutLogs.Presentation.Pages
         public NavigationManager NavigationManager { get; set; }
         protected void NewWorkout()
         {
-            NavigationManager.NavigateTo("/session/");
+            NavigationManager.NavigateTo("/exerciseTypes/");
         }
     }
 }

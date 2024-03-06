@@ -1,0 +1,10 @@
+﻿@page "/exerciseTypes/"
+<h3>ExerciseType</h3>
+
+
+<div class="button-container">
+    @foreach (var exerciseType in ExerciseTypes)
+    {
+        <button @onclick="() => OptionClicked(exerciseType.Id)" class="exerciseType">@exerciseType.Name</button>
+    }
+</div>
