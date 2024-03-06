@@ -1,7 +1,10 @@
-﻿namespace WorkoutLogs.Presentation.Contracts
+﻿using WorkoutLogs.Core;
+using WorkoutLogs.Presentation.Services.Base;
+
+namespace WorkoutLogs.Presentation.Contracts
 {
     public interface IExerciseLogService
     {
-        public
+        public Task<ICollection<ExerciseLogDto>> GetExerciseLogsBySessionId(int id);
     }
 }
