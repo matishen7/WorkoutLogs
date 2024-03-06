@@ -26,7 +26,7 @@ namespace WorkoutLogs.Application.Contracts.Features.ExerciseLogs.Queries
 
         public async Task<List<ExerciseLogDto>> Handle(GetExerciseLogsQuery request, CancellationToken cancellationToken)
         {
-            var sessionId = _sessionRepository.GetByIdAsync(request.SessionId);
+            var sessionId = await _sessionRepository.GetByIdAsync(request.SessionId);
             if (sessionId == null)
             {
                 throw new NotFoundException(nameof(sessionId), request.SessionId);
