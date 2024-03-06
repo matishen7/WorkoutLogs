@@ -15,6 +15,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:7260"));
 builder.Services.AddScoped<IExerciseService, ExerciseService>();
 builder.Services.AddScoped<ISessionService, SessionService>();
+builder.Services.AddScoped<IExerciseLogService, ExerciseLogService>();
+builder.Services.AddScoped<IExerciseTypeService, ExerciseTypeService>();
+builder.Services.AddScoped<IExerciseGroupService, ExerciseGroupService>();
+builder.Services.AddScoped<IDifficultyService, DifficultyService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 await builder.Build().RunAsync();

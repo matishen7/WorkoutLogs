@@ -16,6 +16,7 @@ using WorkoutLogs.Presentation.Shared;
 using WorkoutLogs.Presentation.Contracts;
 using WorkoutLogs.Presentation.Models.Exercise;
 using WorkoutLogs.Presentation.Services;
+using WorkoutLogs.Presentation.Services.Base;
 
 namespace WorkoutLogs.Presentation.Pages.Session
 {
@@ -27,8 +28,21 @@ namespace WorkoutLogs.Presentation.Pages.Session
         [Inject]
         public ISessionService SessionService { get; set; }
 
+        [Inject]
+        public IExerciseGroupService ExerciseGroupService { get; set; }
+
+        [Inject]
+        public IExerciseTypeService ExerciseTypeService { get; set; }
+
+        [Inject]
+        public IExerciseLogService ExerciseLogService { get; set; }
+
         public int CurrentSessionId { get; private set; }
         public string Message { get; set; } = string.Empty;
+
+        public ICollection<ExerciseTypeDto> ExerciseTypes { get; set; } = new List<ExerciseTypeDto>();
+        public ICollection<List<ExerciseGroupDto>> ExerciseGroups { get; set; } = new List<List<ExerciseGroupDto>>();
+        public ICollection<ExerciseLogDto> ExerciseLogs { get; set; } = new List<ExerciseLogDto>();
 
         protected async Task CreateSession()
         {
@@ -66,9 +80,20 @@ namespace WorkoutLogs.Presentation.Pages.Session
             }
         }
 
+        protected async Task LoadExerciseGroups()
+        {
+            ExerciseTypes = await ExerciseTypeService.GetAllExerciseTypes();
+            foreach (var exerciseType in ExerciseTypes)
+            {
+                var exerciseGroups = await ExerciseGroupService.GetExerciseGroupsAsync(exerciseType.Id);
+                ExerciseGroups.Add(exerciseGroups.ToList());
+            }
+        }
+
         protected override async Task OnInitializedAsync()
         {
             await CreateSession();
+            await LoadExerciseGroups();
         }
     }
 }

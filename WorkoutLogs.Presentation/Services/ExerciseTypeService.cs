@@ -15,7 +15,7 @@ namespace WorkoutLogs.Presentation.Services
 
         public async Task<ICollection<ExerciseTypeDto>> GetAllExerciseTypes()
         {
-            return await _client.GetAllExerciseTypesAsync(new GetAllExerciseTypesQuery());
+            return await _client.GetAllAsync(new GetAllExerciseTypesQuery());
         }
     }
 }
