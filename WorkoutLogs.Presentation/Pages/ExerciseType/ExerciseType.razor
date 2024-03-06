@@ -1,10 +1,17 @@
 ﻿@page "/exerciseTypes/"
 <h3>ExerciseType</h3>
 
-
+<div class="Loading"></div>
+@if (ExerciseTypes == null)
+{
+    <p>Loading Data...</p>
+}
+else
+{
 <div class="button-container">
     @foreach (var exerciseType in ExerciseTypes)
     {
         <button @onclick="() => OptionClicked(exerciseType.Id)" class="exerciseType">@exerciseType.Name</button>
     }
 </div>
+}

@@ -2,6 +2,20 @@
 <title>Workout Session</title>
 
 
+<div class="Loading"></div>
+@if (ExerciseGroups == null)
+{
+    <p>Loading Data...</p>
+}
+else
+{
+    foreach (var exerciseGroup in ExerciseGroups)
+    {
+        <div class="accordion-body">
+            @exerciseGroup.Id
+        </div>
+    }
+}
 
 @if (string.IsNullOrEmpty(Message) == false)
 {
@@ -9,10 +23,6 @@
         @Message
     </div>
 }
-
-
-
-
 
 <div class="m-2 d-flex justify-content-middle">
     <button @onclick="EndSession" class="btn btn-success">End session</button>
