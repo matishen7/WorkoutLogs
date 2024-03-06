@@ -36,6 +36,9 @@ namespace WorkoutLogs.Presentation.Pages.Session
 
         [Inject]
         public IExerciseLogService ExerciseLogService { get; set; }
+        [Inject]
+
+        public IExerciseService ExerciseService { get; set; }
 
         public int CurrentSessionId { get; private set; }
         public string Message { get; set; } = string.Empty;
@@ -43,6 +46,7 @@ namespace WorkoutLogs.Presentation.Pages.Session
         public ICollection<ExerciseTypeDto> ExerciseTypes { get; set; } = new List<ExerciseTypeDto>();
         public ICollection<ExerciseGroupDto> ExerciseGroups { get; set; } = new List<ExerciseGroupDto>();
         public ICollection<ExerciseLogDto> ExerciseLogs { get; set; } = new List<ExerciseLogDto>();
+        public ICollection<ExerciseVM> Exercises { get; set; } = new List<ExerciseVM>();
 
         protected async Task CreateSession()
         {
@@ -89,6 +93,38 @@ namespace WorkoutLogs.Presentation.Pages.Session
         {
             await CreateSession();
             if (exerciseTypeId != 0) await LoadExerciseGroups(exerciseTypeId);
+        }
+
+        public int SelectedExerciseGroupId { get; set; }
+
+        protected async Task ExerciseGroupChanged(ChangeEventArgs e)
+        {
+            if (int.TryParse(e.Value.ToString(), out int selectedId))
+            {
+                SelectedExerciseGroupId = selectedId;
+                Exercises.Clear();
+                Exercises = await ExerciseService.GetByGroupIdAsync(SelectedExerciseGroupId);
+            }
+            else
+            {
+                SelectedExerciseGroupId = 0;
+            }
+        }
+
+        public int SelectedExerciseId { get; set; }
+        public string CurrentExerciseTutorial { get; set; } = string.Empty;
+
+        protected async Task ExerciseChanged(ChangeEventArgs e)
+        {
+            if (int.TryParse(e.Value.ToString(), out int selectedId))
+            {
+                SelectedExerciseId = selectedId;
+                CurrentExerciseTutorial = Exercises.FirstOrDefault(x => x.Id == selectedId).TutorialUrl;
+            }
+            else
+            {
+                SelectedExerciseId = 0;
+            }
         }
     }
 }

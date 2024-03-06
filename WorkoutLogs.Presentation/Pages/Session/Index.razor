@@ -2,20 +2,7 @@
 <title>Workout Session</title>
 
 
-<div class="Loading"></div>
-@if (ExerciseGroups == null)
-{
-    <p>Loading Data...</p>
-}
-else
-{
-    foreach (var exerciseGroup in ExerciseGroups)
-    {
-        <div class="accordion-body">
-            @exerciseGroup.Id
-        </div>
-    }
-}
+
 
 @if (string.IsNullOrEmpty(Message) == false)
 {
@@ -23,6 +10,36 @@ else
         @Message
     </div>
 }
+
+<div class="Loading"></div>
+@if (ExerciseGroups == null || ExerciseGroups.Count == 0)
+{
+    <p>Loading Data...</p>
+}
+else
+{
+    <select class="exercise-dropdown" @onchange="ExerciseGroupChanged">
+        <option value="">Select an exercise group</option>
+        @foreach (var exerciseGroup in ExerciseGroups)
+        {
+            <option value="@exerciseGroup.Id">@exerciseGroup.Name</option>
+        }
+    </select>
+
+}
+
+
+<select class="exercise-dropdown" @onchange="ExerciseChanged">
+    <option value="">Select an exercise</option>
+    @foreach (var exercise in Exercises)
+    {
+        <option value="@exercise.Id">@exercise.Name</option>
+    }
+</select>
+
+<a href="@CurrentExerciseTutorial" class="styled-link" target="_blank"> See tutorial</a>
+
+
 
 <div class="m-2 d-flex justify-content-middle">
     <button @onclick="EndSession" class="btn btn-success">End session</button>
