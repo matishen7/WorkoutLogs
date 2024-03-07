@@ -1,8 +1,6 @@
-﻿@page "/session/{exerciseTypeId:int}"
+﻿@inject IJSRuntime JSRuntime
+@page "/session/{exerciseTypeId:int}"
 <title>Workout Session</title>
-
-
-
 
 @if (string.IsNullOrEmpty(Message) == false)
 {
@@ -11,38 +9,60 @@
     </div>
 }
 
-<div class="Loading"></div>
-@if (ExerciseGroups == null || ExerciseGroups.Count == 0)
-{
-    <p>Loading Data...</p>
-}
-else
-{
-    <select class="exercise-dropdown" @onchange="ExerciseGroupChanged">
-        <option value="">Select an exercise group</option>
-        @foreach (var exerciseGroup in ExerciseGroups)
-        {
-            <option value="@exerciseGroup.Id">@exerciseGroup.Name</option>
-        }
-    </select>
-
-}
-
-
-<select class="exercise-dropdown" @onchange="ExerciseChanged">
-    <option value="">Select an exercise</option>
-    @foreach (var exercise in Exercises)
+<div class="form-container">
+    <h2>Exercise Log</h2>
+    @if (ExerciseGroups == null || ExerciseGroups.Count == 0)
     {
-        <option value="@exercise.Id">@exercise.Name</option>
+        <p>Loading Data...</p>
     }
-</select>
+    else
+    {
+        <EditForm Model="@exerciseLog" OnValidSubmit="SubmitForm">
+            <label for="exercise-groups">Exercise groups:</label>
+            <select id="exercise-groups" name="exercise-groups" @onchange="ExerciseGroupChanged">
+                <option value="">Select an exercise group</option>
+                @foreach (var exerciseGroup in ExerciseGroups)
+                {
+                    <option value="@exerciseGroup.Id">@exerciseGroup.Name</option>
+                }
+            </select>
 
-<a href="@CurrentExerciseTutorial" class="styled-link" target="_blank"> See tutorial</a>
+            <label for="exercise">Exercise:</label>
+            <select id="exercise" name="exercise" @bind="@exerciseLog.ExerciseId">
+                <option value="">Select an exercise</option>
+                @foreach (var exercise in Exercises)
+                {
+                    <option value="@exercise.Id">@exercise.Name</option>
+                }
+            </select>
 
+            <label for="sets">Sets:</label>
+            <input type="number" id="sets" name="sets" min="1" required @bind="@exerciseLog.Sets">
 
+            <label for="reps">Reps:</label>
+            <input type="number" id="reps" name="reps" min="1" required @bind="@exerciseLog.Reps">
 
-<div class="m-2 d-flex justify-content-middle">
-    <button @onclick="EndSession" class="btn btn-success">End session</button>
+            <label for="weight">Weight (lbs):</label>
+            <input type="number" id="weight" name="weight" min="0" step="0.5" required @bind="@exerciseLog.Weight">
+
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" name="difficulty" @bind="@exerciseLog.DifficultyId">
+                <option value="1">Easy - I could have done 3 more reps</option>
+                <option value="2">Medium - I could have done 2 more reps</option>
+                <option value="3">Hard - I could have done 1 more rep</option>
+                <option value="4">Max effort - I could not have done any more reps</option>
+                <option value="5">Failed - I tried to do another rep but couldn't</option>
+            </select>
+
+            <label for="notes">Additional Notes:</label>
+            <textarea id="additionalNotes" class="styled-textarea" placeholder="Enter additional notes" @bind="@exerciseLog.AdditionalNotes"></textarea>
+            <a href="@CurrentExerciseTutorial" class="styled-link" target="_blank">See tutorial</a>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </EditForm>
+    }
 </div>
 
-
+<div class="m-2 d-flex justify-content-center">
+    <button @onclick="ShowConfirmation" class="btn btn-success">End session</button>
+</div>

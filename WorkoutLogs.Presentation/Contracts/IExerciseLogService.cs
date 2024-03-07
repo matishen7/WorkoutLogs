@@ -6,5 +6,6 @@ namespace WorkoutLogs.Presentation.Contracts
     public interface IExerciseLogService
     {
         public Task<ICollection<ExerciseLogDto>> GetExerciseLogsBySessionId(int id);
+        public Task<int> CreateExerciseLog(CreateExerciseLogCommand command);
     }
 }

@@ -1,21 +1,7 @@
-using global::System;
-using global::System.Collections.Generic;
-using global::System.Linq;
-using global::System.Threading.Tasks;
 using global::Microsoft.AspNetCore.Components;
-using System.Net.Http;
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
-using Microsoft.AspNetCore.Components.WebAssembly.Http;
 using Microsoft.JSInterop;
-using WorkoutLogs.Presentation;
-using WorkoutLogs.Presentation.Shared;
 using WorkoutLogs.Presentation.Contracts;
 using WorkoutLogs.Presentation.Models.Exercise;
-using WorkoutLogs.Presentation.Services;
 using WorkoutLogs.Presentation.Services.Base;
 
 namespace WorkoutLogs.Presentation.Pages.Session
@@ -47,6 +33,7 @@ namespace WorkoutLogs.Presentation.Pages.Session
         public ICollection<ExerciseGroupDto> ExerciseGroups { get; set; } = new List<ExerciseGroupDto>();
         public ICollection<ExerciseLogDto> ExerciseLogs { get; set; } = new List<ExerciseLogDto>();
         public ICollection<ExerciseVM> Exercises { get; set; } = new List<ExerciseVM>();
+        private ExerciseLogDto exerciseLog = new ExerciseLogDto();
 
         protected async Task CreateSession()
         {
@@ -68,7 +55,15 @@ namespace WorkoutLogs.Presentation.Pages.Session
                 Message = "Something went wrong with creating workout session! Try again later..";
             }
         }
+        private async Task ShowConfirmation()
+        {
+            bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to end the session?");
 
+            if (confirmed)
+            {
+                await EndSession();
+            }
+        }
         protected async Task EndSession()
         {
             if (CurrentSessionId == 0) { Message = "Please, create new workout session first!"; return; }
@@ -124,6 +119,31 @@ namespace WorkoutLogs.Presentation.Pages.Session
             else
             {
                 SelectedExerciseId = 0;
+            }
+        }
+
+        protected async Task SubmitForm()
+        {
+            var createExerciseLog = new CreateExerciseLogCommand()
+            {
+                MemberId = 2,
+                DifficultyId = exerciseLog.DifficultyId,
+                AdditionalNotes = (exerciseLog.AdditionalNotes == null)? string.Empty : exerciseLog.AdditionalNotes,
+                ExerciseId = exerciseLog.ExerciseId,
+                Reps = exerciseLog.Reps,
+                SessionId = CurrentSessionId,
+                Sets = exerciseLog.Sets,
+                Weight = exerciseLog.Weight,
+            };
+
+            try
+            {
+                var exerciseLog = await ExerciseLogService.CreateExerciseLog(createExerciseLog);
+                Message = "You successfully logged exercise.";
+            }
+            catch (Exception)
+            {
+                Message = "Something went wrong with logging the exercise.";
             }
         }
     }

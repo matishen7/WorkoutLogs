@@ -14,6 +14,11 @@ namespace WorkoutLogs.Presentation.Services
             this.mapper = mapper;
         }
 
+        public async Task<int> CreateExerciseLog(CreateExerciseLogCommand command)
+        {
+            return await _client.CreateExerciseLogAsync(command);
+        }
+
         public async Task<ICollection<ExerciseLogDto>> GetExerciseLogsBySessionId(int id)
         {
             var request = new GetExerciseLogsQuery() { SessionId = id };
